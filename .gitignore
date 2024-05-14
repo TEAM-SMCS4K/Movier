@@ -41,3 +41,4 @@ build/
 ### setting files ###
 !**/src/main/**/resources/
 !**/src/test/**/resources/
+*.properties
