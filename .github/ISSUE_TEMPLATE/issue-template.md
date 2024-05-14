@@ -1,6 +1,6 @@
 ---
 name: Issue Template
-about: nonsoolmate Issue Template
+about: movier Issue Template
 title: "[FEAT]"
 labels: ''
 assignees: ''
