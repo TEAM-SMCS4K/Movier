@@ -1,0 +1,142 @@
+body {
+    font-family: SUIT;
+    background-color: #F8F8F8;
+    margin: 0;
+    padding: 0;
+}
+
+.nav_tab_var .movier-logo {
+    content: url("/img/movier_logo.svg");
+    height: 44px;
+    margin-left: 200px;
+}
+
+.my-profile {
+    text-align: center;
+    margin: 20px;
+}
+
+.profile-pic {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.2));
+}
+
+.my-profile .nickname {
+    margin: 10px 0 5px;
+    font-weight: 700;
+    line-height: 44px;
+    font-size: 32px;
+}
+
+.my-profile .message {
+    color: #F16060;
+    margin: 0px 0 20px;
+    font-weight: 400;
+    line-height: 35px;
+    font-size: 28px;
+}
+
+.reviews {
+    box-shadow: 0px 10px 16px 11px rgba(0, 0, 0, 0.08);
+    border-radius: 100px 100px 0px 0px;
+    margin-top: 50px;
+    background-color: #fff;
+    padding: 50px 100px;
+    box-sizing: border-box;
+}
+
+.reviews h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+    line-height: 40px;
+    padding-left: 160px;
+}
+
+.review-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px 28px;
+    justify-content: center;
+}
+
+.review {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 473px;
+    gap: 28px;
+}
+
+.review-poster img{
+    width: 203px;
+    height: 270px;
+    box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.review-details {
+    height: 270px;
+    order: 0;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: auto;
+}
+
+.review-details h3 {
+    margin: 0 10px 0 0;
+    font-size: 24px;
+    line-height: 30px;
+    color: #151212;
+}
+
+.review-details .rating {
+    color: #F16060;
+    font-size: 18px;
+}
+
+.review-details .review-count {
+    color: #F16060;
+    font-size: 18px;
+}
+
+.review-content {
+    margin: 5px 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #8B8484;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 149px;
+    max-width: 180px;
+}
+
+.review-date {
+    display: flex;
+    align-items: center;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    color: #8B8484;
+    width: 268px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: auto;
+}
