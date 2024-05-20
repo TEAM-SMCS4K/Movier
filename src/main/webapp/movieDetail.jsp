@@ -51,33 +51,9 @@
             광역수사대는 물론,<br>
             사이버수사대까지 합류해 범죄를 소탕하기 시작하는데…<br>
         </div>
-        <div class="review-request">
-            <p><span>범죄도시 4</span> 재미있게 보셨나요?<br> OO님의 의견도 알려주세요!</p>
-            <button class="review-button">리뷰 작성하기</button>
-        </div>
-        <div class="review-section">
-        <div class="review-list-title"><p>다른 사람의 리뷰</p></div>
-        <div class="review-list-option">
-            <div class="sort-area">
-                <div><p>최신순</p></div>
-                <div><p>별점순</p></div>
-            </div>
-            <div class="separator-area"><p>|</p></div>
-            <div class="filter-area">
-                <div><p>별점 필터</p></div>
-                <div class="filter-bar">
-                    <div><p>⭐</p></div>
-                    <div><p>2.5</p></div>
-                    <div>상태바 들어갈 자리</div>
-                    <button class="apply-button">적용하기</button>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="review-list">
-            <jsp:include page="/reviewComponent.jsp" />
-        </div>
-        </div>
+        <jsp:include page="/reviewRequest.jsp" />
+        <jsp:include page="/reviewList.jsp"/>
     </div>
+</div>
 </body>
 </html>
