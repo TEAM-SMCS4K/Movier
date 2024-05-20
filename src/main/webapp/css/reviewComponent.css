@@ -1,3 +1,8 @@
+p{
+    padding: 0;
+    margin: 0;
+}
+
 .review{
     width: 966px;
 }
@@ -18,7 +23,6 @@
 .reviewer{
     color: #151212;
     font-size: 24px;
-    padding-top: 5px;
     font-weight: bold;
 }
 
@@ -30,7 +34,6 @@
 .review-rating p{
     font-size: 18px;
     color: #F16060;
-    padding-top: 4px;
     margin: 0;
 }
 
