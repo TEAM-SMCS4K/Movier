@@ -20,6 +20,7 @@ body {
 .ratingBox {
     display: flex;
     align-items: center;
+    margin-bottom: 48px;
 }
 
 .rating_icon {

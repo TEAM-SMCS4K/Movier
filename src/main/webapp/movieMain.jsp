@@ -23,10 +23,13 @@
     </div>
     <div class="movie_list">
         <span class="movie_list_title">무비차트</span>
-        <div class="movie_list_cell">
+        <div class="movie_list_grid">
+            <% for (int i = 0; i < 30; i++) { %>
             <jsp:include page="movieListCell.jsp"></jsp:include>
+            <% } %>
         </div>
     </div>
 </div>
+<script src="js/main.js"></script>
 </body>
 </html>
