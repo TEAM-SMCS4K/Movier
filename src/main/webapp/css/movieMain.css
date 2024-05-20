@@ -1,5 +1,5 @@
 .body {
-    font-family: Arial, sans-serif;
+    font-family: SUIT, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -11,5 +11,36 @@
 .logo {
     margin: 0 auto;
     padding-top: 60px;
+    padding-bottom: 32px;
     display: flex;
+}
+
+.searchBox {
+    margin: 0 auto;
+    padding-top: -32px;
+    width: 770px;
+    height: 68px;
+    border: 2px solid #E3E3E3;
+    border-radius: 60px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+    display: flex;
+}
+
+.search_icon {
+    padding-left: 20px;
+    width: 40px;
+    display: flex;
+}
+
+#search_input {
+    width: calc(100% - 100px);
+    border: none;
+    font-size: 20px;
+    outline: none;
+    color: #151212;
+    font-weight: 600;
+}
+
+#search_input::placeholder {
+    color: #AFA8A8;
 }
