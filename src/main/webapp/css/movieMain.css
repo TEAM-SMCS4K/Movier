@@ -17,7 +17,6 @@
 
 .searchBox {
     margin: 0 auto;
-    padding-top: -32px;
     width: 770px;
     height: 68px;
     border: 2px solid #E3E3E3;
@@ -43,4 +42,12 @@
 
 #search_input::placeholder {
     color: #AFA8A8;
+}
+
+.movie_list {
+    padding-top: 72px;
+    padding-left: 200px;
+    color: #151212;
+    font-weight: 700;
+    font-size: 32px;
 }
