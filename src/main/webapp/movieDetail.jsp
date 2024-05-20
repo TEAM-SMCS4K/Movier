@@ -10,6 +10,7 @@
 <head>
     <title>Movier</title>
     <link rel="stylesheet" href="css/movieDetail.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body>
 <div class="background-container">
@@ -51,7 +52,7 @@
             사이버수사대까지 합류해 범죄를 소탕하기 시작하는데…<br>
         </div>
         <div class="review-request">
-            <p>범죄도시 4 재미있게 보셨나요?<br> OO님의 의견도 알려주세요!</p>
+            <p><span>범죄도시 4</span> 재미있게 보셨나요?<br> OO님의 의견도 알려주세요!</p>
             <button class="review-button">리뷰 작성하기</button>
         </div>
         <div class="review-section">
