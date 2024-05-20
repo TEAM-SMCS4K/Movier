@@ -11,6 +11,10 @@ body {
     margin-left: 200px;
 }
 
+.nav_tab_var .profile .nickname{
+    color: #151212;
+}
+
 .my-profile {
     text-align: center;
     margin: 20px;
@@ -25,11 +29,12 @@ body {
     filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.2));
 }
 
-.my-profile .nickname {
+.my-profile .my-profile-nickname {
     margin: 10px 0 5px;
     font-weight: 700;
     line-height: 44px;
     font-size: 32px;
+    color: #151212;
 }
 
 .my-profile .message {
