@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="review-list">
-<%--            <jsp:include page="/reviewComponent.jsp" />--%>
+            <jsp:include page="/reviewComponent.jsp" />
         </div>
         </div>
     </div>

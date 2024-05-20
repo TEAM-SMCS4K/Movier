@@ -1,6 +1,13 @@
 body{
     font-family: 'SUIT', sans-serif;
     background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+p{
+    padding: 0;
+    margin: 0;
 }
 
 .background-container {
@@ -18,29 +25,6 @@ body{
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
-}
-
-.movier-logo{
-    height: 44px;
-    margin-left: 200px;
-}
-
-.profile{
-    display: flex;
-    align-items: center;
-    width: 221px;
-    height: 28px;
-    margin-right: 200px;
-}
-
-.profile_img{
-    margin-right: 10px;
-    width: 28px;
-    height: 28px;
-}
-
-.nickname{
-    color: #ffffff;
 }
 
 .movie-details {
@@ -261,8 +245,6 @@ body{
     margin-left: 41px;
 }
 
-/* 리뷰 리스트 스타일 */
-.review-list {
-    width: 966px;
-    margin: 0;
+.review-list{
+    margin-bottom: 248px;
 }
