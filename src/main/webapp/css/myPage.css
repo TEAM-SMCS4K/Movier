@@ -71,7 +71,7 @@ body {
     gap: 28px;
 }
 
-.review-poster {
+.review-poster img{
     width: 203px;
     height: 270px;
     box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.08);
