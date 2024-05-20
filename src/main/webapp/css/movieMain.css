@@ -47,7 +47,7 @@
 
 .movie_list {
     padding-top: 72px;
-    padding-left: 200px;
+    padding-left: 300px;
     padding-bottom: 18px;
 }
 
@@ -61,8 +61,8 @@
 
 .movie_list_grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    padding: 0 200px 200px 0;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 0 300px 300px 0;
 }
 
 
