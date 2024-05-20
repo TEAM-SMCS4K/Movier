@@ -1,0 +1,15 @@
+.body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.nav_tab_var .nickname {
+    color: #666060;
+}
+
+.logo {
+    margin: 0 auto;
+    padding-top: 60px;
+    display: flex;
+}
