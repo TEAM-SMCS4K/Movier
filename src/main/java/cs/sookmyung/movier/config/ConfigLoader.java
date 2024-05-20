@@ -25,7 +25,6 @@ public class ConfigLoader {
     }
 
     public String getKey(String key) {
-        System.out.println(prop.getProperty(key));
         return prop.getProperty(key);
     }
 }
