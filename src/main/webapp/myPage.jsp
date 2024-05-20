@@ -6,11 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="cs.sookmyung.movier.Review" %>
-<%
-    List<Review> reviews = (List<Review>) request.getAttribute("reviews");
-%>
+<%--<%@ page import="java.util.List" %>--%>
+<%--<%@ page import="cs.sookmyung.movier.Review" %>--%>
+<%--<%--%>
+<%--    List<Review> reviews = (List<Review>) request.getAttribute("reviews");--%>
+<%--%>--%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,7 +24,7 @@
 <jsp:include page="/navTabBar.jsp" />
 <div class="my-profile">
     <img src="img/profile.svg" alt="Profile Picture" class="profile-pic">
-    <p class="nickname">갈라파고스의 소시지</p>
+    <p class="my-profile-nickname">갈라파고스의 소시지</p>
     <p class="message">축하해요! 지금까지 N개의 리뷰를 작성했네요</p>
 </div>
 <div class="reviews">
