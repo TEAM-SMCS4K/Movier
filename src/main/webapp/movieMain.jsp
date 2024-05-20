@@ -24,7 +24,7 @@
     <div class="movie_list">
         <span class="title">무비차트</span>
         <div class="movie_list_cell">
-<%--            영화 리스트--%>
+            <jsp:include page="movieListCell.jsp"></jsp:include>
         </div>
     </div>
 </div>
