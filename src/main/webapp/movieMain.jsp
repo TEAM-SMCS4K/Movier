@@ -22,7 +22,7 @@
         <input type="text" id="search_input" placeholder="영화의 제목을 입력하세요.">
     </div>
     <div class="movie_list">
-        <span class="title">무비차트</span>
+        <span class="movie_list_title">무비차트</span>
         <div class="movie_list_cell">
             <jsp:include page="movieListCell.jsp"></jsp:include>
         </div>
