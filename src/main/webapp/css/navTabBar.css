@@ -7,3 +7,29 @@
     padding-bottom: 30px; /* 여백 추가 */
     background: none; /* 배경 없음 */
 }
+
+.profile {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    margin-right: 200px;
+}
+
+.profile_img {
+    margin: 10px;
+    width: 28px;
+    height: 28px;
+}
+
+.movier-logo{
+    height: 44px;
+    width: 132px;
+    margin-left: 200px;
+}
+
+.nickname{
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+}
