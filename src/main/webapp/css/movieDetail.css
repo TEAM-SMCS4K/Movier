@@ -1,6 +1,7 @@
 body{
     font-family: 'SUIT', sans-serif;
     background: transparent;
+    margin: 0;
 }
 
 .background-container {
@@ -18,29 +19,6 @@ body{
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
-}
-
-.movier-logo{
-    height: 44px;
-    margin-left: 200px;
-}
-
-.profile{
-    display: flex;
-    align-items: center;
-    width: 221px;
-    height: 28px;
-    margin-right: 200px;
-}
-
-.profile_img{
-    margin-right: 10px;
-    width: 28px;
-    height: 28px;
-}
-
-.nickname{
-    color: #ffffff;
 }
 
 .movie-details {
@@ -73,6 +51,7 @@ body{
     display: flex;
     align-items: center;
     gap: 9px;
+    margin-bottom: 10px;
 }
 
 .movie-title{
@@ -82,18 +61,19 @@ body{
     width: 195px;
     height: 55px;
     font-size: 44px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .genre{
     width: 116px;
     height: 41px;
-    background: #F5F5F5;
+    background: #F7F7F7;
     border-radius: 30px;
     font-size: 18px;
     color: #939393;
-    font-weight: bold;
     display: flex;
+    font-weight: 700;
+    line-height: 22px;
     align-items: center;
     justify-content: center;
 }
@@ -101,9 +81,9 @@ body{
 .release-date{
     display: flex;
     align-items: center;
-    width: 201px;
+    /*width: 205px;*/
     height: 30px;
-    font-weight: normal;
+    font-weight: 500;
     margin-top: 10px ;
     font-size: 24px;
     color: #8B8484;
@@ -116,32 +96,36 @@ body{
     gap: 8px;
 }
 
-.rating p{
+.rating p {
     margin: 0;
 }
 
 .score{
     font-size: 36px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
-.star-rate{
-    background: url(https://aldo814.github.io/jobcloud/html/images/user/star_bg02.png) no-repeat;
-    width: 121px;
-    height: 20px;
+.star-rate {
+    background: url("/img/ic_star_empty_set.svg") no-repeat;
+    width: 220px;  /* 별점 전체 너비 */
+    height: 44px;  /* 별점 높이 */
     position: relative;
+    display: inline-block;  /* 부모 요소가 크기를 가지고 있도록 함 */
 }
 
-.start-rate span{
+.star-rate span {
     position: absolute;
-    background: url(https://aldo814.github.io/jobcloud/html/images/user/star02.png);
-    width: auto;
-    height: 20px;
+    background: url("/img/ic_star_full_set.svg") no-repeat;
+    height: 44px;  /* 별점 높이 */
+    top: 0;
+    left: 0;
+    display: inline-block;
 }
 
 .review-count{
-    padding-top: 4px;
     font-size: 36px;
+    font-weight: 400;
+    line-height: 45px;
 }
 
 .main-content {
@@ -184,9 +168,15 @@ body{
 .review-request p {
     color: #ffffff;
     font-size: 32px;
+    font-weight: 500;
     height: 88px;
     margin-left: 200px;
     line-height: 44px;
+}
+
+.review-request p span{
+    font-weight: 700;
+    font-size: 32px;
 }
 
 .review-button {
@@ -221,8 +211,10 @@ body{
     display: flex;
     align-items: center;
     font-size: 20px;
+    font-weight: 500;
     margin-top: 20px;
     margin-bottom: 40px;
+    color: #AFA8A8;
 }
 
 .sort-area{
@@ -235,7 +227,6 @@ body{
     display: flex;
     align-items: center;
     margin: 0 24px 0 24px;
-    color: #AFA8A8;
 }
 
 .filter-area{
@@ -261,8 +252,6 @@ body{
     margin-left: 41px;
 }
 
-/* 리뷰 리스트 스타일 */
-.review-list {
-    width: 966px;
-    margin: 0;
+.review-list{
+    margin-bottom: 248px;
 }
