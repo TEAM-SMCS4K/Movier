@@ -12,10 +12,8 @@ public class Movie {
     private Date releaseDate;
     private int runningTime;
     private String plot;
-    private double ratingAverage;
-    private int reviewCount;
 
-    public Movie(int id, String title, String posterImg, String thumbnailImg, String genre, Date releaseDate, int runningTime, String plot, double ratingAverage, int reviewCount) {
+    public Movie(int id, String title, String posterImg, String thumbnailImg, String genre, Date releaseDate, int runningTime, String plot) {
         this.id = id;
         this.title = title;
         this.posterImg = posterImg;
@@ -24,8 +22,6 @@ public class Movie {
         this.releaseDate = releaseDate;
         this.runningTime = runningTime;
         this.plot = plot;
-        this.ratingAverage = ratingAverage;
-        this.reviewCount = reviewCount;
     }
 
     public int getId() {
@@ -56,16 +52,5 @@ public class Movie {
 
     public String getPlot() {
         return plot;
-    }
-
-    public double getRatingAverage() {
-        return ratingAverage;
-    }
-
-    public String getReviewCount() {
-        if(reviewCount > 100){
-            return "(100+)";
-        }
-        return "("+reviewCount+")";
     }
 }
