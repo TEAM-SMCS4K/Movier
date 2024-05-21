@@ -1,0 +1,150 @@
+body {
+    font-family: 'SUIT', sans-serif;
+    background: transparent;
+}
+
+.background-container {
+    width: 100vw;
+    position: relative;
+    background: url("http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88104/88104224213_727.jpg") no-repeat center /cover;
+    padding-bottom: 45px;
+}
+
+.background-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.movier-logo{
+    height: 44px;
+    margin-left: 200px;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    width: 221px;
+    height: 28px;
+    margin-right: 200px;
+}
+
+.profile_img{
+    margin-right: 10px;
+    width: 28px;
+    height: 28px;
+}
+
+.nickname{
+    color: #ffffff;
+}
+
+.review-card {
+    background-color: #fff;
+    border-radius: 20px;
+    margin: 16px 200px;
+    padding: 50px;
+    height: 619px;
+    color: #000;
+    position: relative;
+}
+
+.movie-details{
+    width: 300px;
+    margin-right: 50px;
+    float: left;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 450px;
+    background-color: #ddd;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.movie-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.movie-title{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    height: 35px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.movie-genre {
+    width: 92px;
+    height: 31px;
+    background: #F5F5F5;
+    border-radius: 30px;
+    font-size: 15px;
+    color: #939393;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.release-date{
+    display: flex;
+    align-items: center;
+    height: 20px;
+    font-weight: normal;
+    margin-top: 16px ;
+    font-size: 20px;
+    color: #8B8484;
+}
+
+.review-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 19px;
+}
+
+.input-box {
+    font-size: 15px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.input-box::placeholder {
+    color: #aaa;
+}
+
+.review-submit {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
+
+.submit-button {
+    background: #F16060;
+    border-radius: 30px;
+    font-size: 20px;
+    border: none;
+    width: 138px;
+    height: 45px;
+    color: #ffffff;
+    margin-left: 41px;
+}
