@@ -10,5 +10,6 @@
 <a href="hello-servlet">Hello Servlet</a>
 <a href="/socialLogin.jsp">Social Login</a>
 <a href="/writeReview.jsp">Write Review</a>
+<a href="/movieMain.jsp">Main</a>
 </body>
 </html>
