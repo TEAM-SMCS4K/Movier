@@ -3,7 +3,7 @@ CREATE TABLE movies (
                         movie_name VARCHAR2(100) NOT NULL,
                         movie_genre VARCHAR2(30),
                         movie_release_date DATE,
-                        movie_screen_time VARCHAR2(8),
+                        movie_running_time VARCHAR2(8),
                         movie_poster_img VARCHAR2(255),
                         movie_thumbnail_img VARCHAR2(255),
                         movie_plot VARCHAR2(1000)
