@@ -2,6 +2,7 @@ package cs.sookmyung.movier.dao;
 
 import cs.sookmyung.movier.config.ConfigLoader;
 import cs.sookmyung.movier.model.Movie;
+import cs.sookmyung.movier.model.MovieReviewInfo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,10 +30,11 @@ public class MovieDao {
 
     public Movie getMovieById(int movieId) {
         Movie movie = null;
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
-            String sql = "SELECT m.*, COUNT(r.review_id) as reviewCount, AVG(r.review_rating) as ratingAverage "
-                    + "FROM movies m LEFT JOIN reviews r ON m.movie_id = r.movie_id "
-                    + "WHERE m.movie_id =? GROUP BY m.movie_id";
+        try  {
+            System.out.println(movieId + "영화 아이디가 제대로 들어감?");
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
+            String sql = "SELECT * FROM movies WHERE movie_id =?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, movieId);
@@ -47,14 +49,37 @@ public class MovieDao {
                         resultSet.getString("movie_genre"),
                         resultSet.getDate("movie_release_date"),
                         resultSet.getInt("movie_running_time"),
-                        resultSet.getString("movie_plot"),
-                        resultSet.getDouble("ratingAverage"),
+                        resultSet.getString("movie_plot"));
+            }
+        } catch (Exception e) {
+            System.out.println("영화 상세 정보를 가져오는데 실패했습니다.");
+        }
+        return movie;
+    }
+
+    public MovieReviewInfo getMovieReviewInfoById(int movieId){
+        MovieReviewInfo movieReviewInfo = null;
+        try  {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
+            String sql = "SELECT m.movie_id, COUNT(r.review_id) as reviewCount, AVG(r.review_rating) as ratingAverage"
+                    + " FROM movies m LEFT JOIN reviews r ON m.movie_id = r.movie_id "
+                    + " WHERE m.movie_id =?"
+                    + " GROUP BY m.movie_id";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, movieId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                movieReviewInfo = new MovieReviewInfo(
+                        resultSet.getInt("ratingAverage"),
                         resultSet.getInt("reviewCount"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("리뷰와 관련된 영화 정보를 가져오는데 실패했습니다.");
         }
-        return movie;
+        return movieReviewInfo;
     }
 }
 
