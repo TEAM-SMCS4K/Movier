@@ -3,24 +3,21 @@ package cs.sookmyung.movier.dao;
 import cs.sookmyung.movier.config.ConfigLoader;
 import cs.sookmyung.movier.model.Movie;
 import cs.sookmyung.movier.model.MovieReviewInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class MovieDAO {
     private static final String JDBC_URL = ConfigLoader.getInstance().getKey("oracle.db.url");
     private static final String DB_USER = ConfigLoader.getInstance().getKey("oracle.db.username");
     private static final String DB_PASSWORD = ConfigLoader.getInstance().getKey("oracle.db.password");
-
-    // 싱글톤 인스턴스를 저장할 정적 변수
     private static MovieDAO instance;
 
-    // private 생성자를 통해 외부에서의 인스턴스 생성을 방지
+    private static final Logger LOGGER = LoggerFactory.getLogger(MovieDAO.class);
+
     private MovieDAO() {}
 
-    // 싱글톤 인스턴스를 반환하는 메서드
     public static synchronized MovieDAO getInstance() {
         if (instance == null) {
             instance = new MovieDAO();
@@ -28,58 +25,57 @@ public class MovieDAO {
         return instance;
     }
 
-    public Movie getMovieById(int movieId) {
-        Movie movie = null;
-        try  {
-            System.out.println(movieId + "영화 아이디가 제대로 들어감?");
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
-            String sql = "SELECT * FROM movies WHERE movie_id =?";
-
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, movieId);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                movie = new Movie(
-                        resultSet.getInt("movie_id"),
-                        resultSet.getString("movie_name"),
-                        resultSet.getString("movie_poster_img"),
-                        resultSet.getString("movie_thumbnail_img"),
-                        resultSet.getString("movie_genre"),
-                        resultSet.getDate("movie_release_date"),
-                        resultSet.getInt("movie_running_time"),
-                        resultSet.getString("movie_plot"));
-            }
-        } catch (Exception e) {
-            System.out.println("영화 상세 정보를 가져오는데 실패했습니다.");
-        }
-        return movie;
+    private Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
     }
 
-    public MovieReviewInfo getMovieReviewInfoById(int movieId){
-        MovieReviewInfo movieReviewInfo = null;
-        try  {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
-            String sql = "SELECT m.movie_id, COUNT(r.review_id) as reviewCount, AVG(r.review_rating) as ratingAverage"
-                    + " FROM movies m LEFT JOIN reviews r ON m.movie_id = r.movie_id "
-                    + " WHERE m.movie_id =?"
-                    + " GROUP BY m.movie_id";
+    public Movie getMovieById(int movieId) {
+        String sql = "SELECT * FROM movies WHERE movie_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, movieId);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                movieReviewInfo = new MovieReviewInfo(
-                        resultSet.getInt("ratingAverage"),
-                        resultSet.getInt("reviewCount"));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new Movie(
+                            resultSet.getInt("movie_id"),
+                            resultSet.getString("movie_name"),
+                            resultSet.getString("movie_poster_img"),
+                            resultSet.getString("movie_thumbnail_img"),
+                            resultSet.getString("movie_genre"),
+                            resultSet.getDate("movie_release_date"),
+                            resultSet.getInt("movie_running_time"),
+                            resultSet.getString("movie_plot")
+                    );
+                }
             }
-        } catch (Exception e) {
-            System.out.println("리뷰와 관련된 영화 정보를 가져오는데 실패했습니다.");
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("영화 상세 정보를 가져오는데 실패했습니다.", e);
         }
-        return movieReviewInfo;
+        return null;
+    }
+
+    public MovieReviewInfo getMovieReviewInfoById(int movieId) {
+        String sql = "SELECT m.movie_id, COUNT(r.review_id) AS reviewCount, AVG(r.review_rating) AS ratingAverage"
+                + " FROM movies m LEFT JOIN reviews r ON m.movie_id = r.movie_id"
+                + " WHERE m.movie_id = ?"
+                + " GROUP BY m.movie_id";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, movieId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new MovieReviewInfo(
+                            resultSet.getDouble("ratingAverage"),
+                            resultSet.getInt("reviewCount")
+                    );
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("리뷰와 관련된 영화 정보를 가져오는데 실패했습니다.", e);
+        }
+        return null;
     }
 }
-
