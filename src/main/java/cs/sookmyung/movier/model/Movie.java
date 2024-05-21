@@ -62,7 +62,10 @@ public class Movie {
         return ratingAverage;
     }
 
-    public int getReviewCount() {
-        return reviewCount;
+    public String getReviewCount() {
+        if(reviewCount > 100){
+            return "(100+)";
+        }
+        return "("+reviewCount+")";
     }
 }
