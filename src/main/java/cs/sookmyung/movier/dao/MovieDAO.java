@@ -9,21 +9,21 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class MovieDao {
+public class MovieDAO {
     private static final String JDBC_URL = ConfigLoader.getInstance().getKey("oracle.db.url");
     private static final String DB_USER = ConfigLoader.getInstance().getKey("oracle.db.username");
     private static final String DB_PASSWORD = ConfigLoader.getInstance().getKey("oracle.db.password");
 
     // 싱글톤 인스턴스를 저장할 정적 변수
-    private static MovieDao instance;
+    private static MovieDAO instance;
 
     // private 생성자를 통해 외부에서의 인스턴스 생성을 방지
-    private MovieDao() {}
+    private MovieDAO() {}
 
     // 싱글톤 인스턴스를 반환하는 메서드
-    public static synchronized MovieDao getInstance() {
+    public static synchronized MovieDAO getInstance() {
         if (instance == null) {
-            instance = new MovieDao();
+            instance = new MovieDAO();
         }
         return instance;
     }

@@ -6,12 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="cs.sookmyung.movier.dao.MovieDao" %>
+<%@ page import="cs.sookmyung.movier.dao.MovieDAO" %>
 <%@ page import="cs.sookmyung.movier.model.Movie" %>
 <%@ page import="cs.sookmyung.movier.model.MovieReviewInfo" %>
 <%
     int movieId = Integer.parseInt(request.getParameter("movieId"));
-    MovieDao movieDao = MovieDao.getInstance();
+    MovieDAO movieDao = MovieDAO.getInstance();
     Movie movie = movieDao.getMovieById(movieId);
     MovieReviewInfo movieReviewInfo = movieDao.getMovieReviewInfoById(movieId);
 
