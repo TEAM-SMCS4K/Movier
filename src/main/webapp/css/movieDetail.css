@@ -8,7 +8,6 @@ body{
     height: 768px;
     width: 100vw;
     position: relative;
-    /*background: url("https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88104/88104224903_727.jpg") no-repeat center /cover;*/
 }
 
 .background-container::before {
@@ -58,7 +57,6 @@ body{
     display: flex;
     align-items: center;
     justify-items: center;
-    width: 195px;
     height: 55px;
     font-size: 44px;
     font-weight: 700;
