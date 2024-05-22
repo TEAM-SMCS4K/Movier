@@ -35,7 +35,7 @@
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/ic_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>
@@ -48,7 +48,7 @@
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/ic_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>
@@ -61,7 +61,7 @@
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/ic_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>
@@ -74,7 +74,7 @@
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/ic_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>
