@@ -103,7 +103,7 @@ body{
 }
 
 .star-rate {
-    background: url("/img/ic_star_empty_set.svg") no-repeat;
+    background: url("/img/icn_star_empty_set.svg") no-repeat;
     width: 220px;
     height: 44px;
     position: relative;
@@ -112,7 +112,7 @@ body{
 
 .star-rate span {
     position: absolute;
-    background: url("/img/ic_star_full_set.svg") no-repeat;
+    background: url("/img/icn_star_full_set.svg") no-repeat;
     height: 44px;
     top: 0;
     left: 0;

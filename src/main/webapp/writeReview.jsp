@@ -10,20 +10,13 @@
 <head>
     <title>Movier Review</title>
     <link rel="stylesheet" href="/css/writeReview.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body>
     <div class="background-container" style="background: url(http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88104/88104224213_727.jpg)no-repeat center /cover">
         <jsp:include page="/navTabBar.jsp"/>
         <div class="review-card">
-            <div class="movie-details">
-                <img src="https://i.namu.wiki/i/rrHaHzTJSB5C7asmwf7DtFFVhVRB7mHMxo3W2UgFEskNo7zpQI68SL_2M7Bbftl3YoM-6yp-ydelIm7U2pOwHw.webp"
-                    alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <div class="movie-title">범죄도시 4</div>
-                    <div class="movie-genre">액션/범죄</div>
-                    <div class="release-date">2024.04.24 | 109분</div>
-                </div>
-            </div>
+            <jsp:include page="/detailsComponent.jsp" />
             <div class="review-content">
                 <h2>나의 별점</h2>
                 <div class="rating">

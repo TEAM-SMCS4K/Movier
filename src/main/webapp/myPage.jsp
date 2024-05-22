@@ -31,11 +31,11 @@
     <h2>내가 작성한 리뷰들</h2>
     <div class="review-list">
         <div class="review">
-            <img src="img/poster.svg" alt="Movie Poster" class="review-poster">
+            <img src="img/movie_poster_dummy.svg" alt="Movie Poster" class="review-poster">
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/icn_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>
@@ -44,11 +44,11 @@
             </div>
         </div>
         <div class="review">
-            <img src="img/poster.svg" alt="Movie Poster" class="review-poster">
+            <img src="img/movie_poster_dummy.svg" alt="Movie Poster" class="review-poster">
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/icn_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>
@@ -57,11 +57,11 @@
             </div>
         </div>
         <div class="review">
-            <img src="img/poster.svg" alt="Movie Poster" class="review-poster">
+            <img src="img/movie_poster_dummy.svg" alt="Movie Poster" class="review-poster">
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/icn_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>
@@ -70,11 +70,11 @@
             </div>
         </div>
         <div class="review">
-            <img src="img/poster.svg" alt="Movie Poster" class="review-poster">
+            <img src="img/movie_poster_dummy.svg" alt="Movie Poster" class="review-poster">
             <div class="review-details">
                 <div class="title-rating">
                     <h3>범죄도시 4</h3>
-                    <span> <img src="img/16_16_star.svg"></span>
+                    <span> <img src="img/icn_star_full.svg"></span>
                     <span class="rating">4.8</span>
                     <span class="review-count">(3)</span>
                 </div>

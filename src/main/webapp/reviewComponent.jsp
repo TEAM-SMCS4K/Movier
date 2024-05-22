@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/reviewComponent.css">
 </head>
 <div class="review">
-    <div class="review-header"><p class="reviewer">지니</p> <div class="review-rating"> <img src="img/ic_star_full.svg"/> <p class="rating">4.8</p></div></div>
+    <div class="review-header"><p class="reviewer">지니</p> <div class="review-rating"> <img src="img/icn_star_full.svg"/> <p class="rating">4.8</p></div></div>
     <div class="review-date"><p>2024.05.05</p></div>
     <div class="review-text"><p>재밌다!</p></div>
     <div class="review-actions">
