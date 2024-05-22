@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: nache
   Date: 24. 5. 22.
-  Time: 오후 7:17
+  Time: 오후 7:50
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,6 +10,7 @@
 <head>
     <title>Movier Review</title>
     <link rel="stylesheet" href="/css/writeReview.css">
+    <link rel="stylesheet" href="/css/myReview.css">
 </head>
 <body>
     <div class="background-container" style="background: url(http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88104/88104224213_727.jpg)no-repeat center /cover">
@@ -25,7 +26,8 @@
                     <input type="text" class="input-box" placeholder="범죄도시 4에 대한 갈라파고스 소시지 님의 생각을 써주세요!">
                 </div>
                 <div class="review-submit">
-                    <input type="submit" class="submit-button" value="완료하기">
+                    <input type="submit" class="edit-button" value="수정하기">
+                    <input type="submit" class="delete-button" value="삭제하기">
                 </div>
             </div>
         </div>
