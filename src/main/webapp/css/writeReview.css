@@ -1,13 +1,12 @@
 body {
     font-family: 'SUIT', sans-serif;
     background: transparent;
+    margin: 0;
 }
 
 .background-container {
     width: 100vw;
-    position: relative;
-    background: url("http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88104/88104224213_727.jpg") no-repeat center /cover;
-    padding-bottom: 45px;
+    height: 100%;
 }
 
 .background-container::before {
