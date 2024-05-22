@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/writeReview.css">
 </head>
 <body>
-    <div class="background-container">
+    <div class="background-container" style="background: url(http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88104/88104224213_727.jpg)no-repeat center /cover">
         <jsp:include page="/navTabBar.jsp"/>
         <div class="review-card">
             <div class="movie-details">
