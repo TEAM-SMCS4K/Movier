@@ -16,7 +16,7 @@
     <img src="img/movie_poster_dummy.svg" alt="poster" class="poster">
     <span class="movie_title">영화제목</span>
     <div class="ratingBox">
-        <img src="img/ic_star_single.svg" alt="rating" class="rating_icon">
+        <img src="img/ic_star_full.svg" alt="rating" class="rating_icon">
         <span class="movie_rating">4.8 (3)</span>
     </div>
 </div>
