@@ -23,7 +23,7 @@
         <div class="filter-area">
             <div class="filter-bar">
                 <label for="review-slider" class="rating-label">별점 필터</label>
-                <img src="img/ic_star_full.svg"/>
+                <img src="img/icn_star_full.svg"/>
                 <p>2.5</p>
                 <input id="review-slider" type="range" min="0" max="5" step="0.5" value="2.5">
             </div>
