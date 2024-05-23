@@ -6,20 +6,26 @@
 <%@ page import="java.util.List" %>
 <%
     Integer memberId = (Integer) session.getAttribute("member_id");
+    boolean redirectToLogin = false;
+    String alertMessage = "";
+
     if (memberId == null) {
-        response.sendRedirect("socialLogin.jsp");
-        return;
-    }
+        redirectToLogin = true;
+        alertMessage = "로그인이 필요합니다";
+    } else {
+        MemberDAO memberDao = MemberDAO.getInstance();
+        Member member = memberDao.getMemberById(memberId);
 
-    MemberDAO memberDao = MemberDAO.getInstance();
-    Member member = memberDao.getMemberById(memberId);
-    if (member == null) {
-        response.sendRedirect("socialLogin.jsp");
-        return;
+        if (member == null) {
+            redirectToLogin = true;
+            alertMessage = "잘못된 접근입니다";
+        } else {
+            ReviewDAO reviewDao = ReviewDAO.getInstance();
+            List<Review> reviews = reviewDao.getReviewsByMemberId(memberId);
+            request.setAttribute("reviews", reviews);
+            request.setAttribute("member", member);
+        }
     }
-
-    ReviewDAO reviewDao = ReviewDAO.getInstance();
-    List<Review> reviews = reviewDao.getReviewsByMemberId(memberId);
 %>
 
 <!DOCTYPE html>
@@ -30,9 +36,20 @@
     <title>MOVIER</title>
     <link rel="stylesheet" href="css/myPage.css">
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
+    <script>
+        <% if (redirectToLogin) { %>
+        alert("<%= alertMessage %>");
+        window.location.href = 'socialLogin.jsp';
+        <% } %>
+    </script>
 </head>
 <body>
 <jsp:include page="navTabBar.jsp" />
+<%
+    if (!redirectToLogin) {
+        Member member = (Member) request.getAttribute("member");
+        List<Review> reviews = (List<Review>) request.getAttribute("reviews");
+%>
 <div class="my-profile">
     <img src="<%= member.getProfileImg() != null ? member.getProfileImg() : "img/profile.svg" %>" alt="Profile Picture" class="profile-pic">
     <p class="my-profile-nickname"><%= member.getNickname() %></p>
@@ -70,5 +87,6 @@
         %>
     </div>
 </div>
+<% } %>
 </body>
 </html>
