@@ -11,5 +11,6 @@
 <a href="/socialLogin.jsp">Social Login</a>
 <a href="/writeReview.jsp">Write Review</a>
 <a href="/movieMain.jsp">Main</a>
+<a href="/myPage.jsp">My Page</a>
 </body>
 </html>
