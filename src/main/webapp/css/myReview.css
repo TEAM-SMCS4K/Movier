@@ -1,0 +1,21 @@
+.edit-button {
+    background: #F16060;
+    border-radius: 30px;
+    font-size: 20px;
+    border: none;
+    width: 138px;
+    height: 45px;
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+.delete-button {
+    background: #302E2E;
+    border-radius: 30px;
+    font-size: 20px;
+    border: none;
+    width: 138px;
+    height: 45px;
+    color: #ffffff;
+    margin-left: 10px;
+}
