@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (document.body.classList.contains(specificPageClass)) {
     profile.addEventListener("click", function(event) {
     event.stopPropagation(); // 이벤트 버블링 방지
-    profileMenu.style.display = profileMenu.style.display === "none" || profileMenu.style.display === "" ? "block" : "none";
+    profileMenu.style.display = profileMenu.style.display === "none" || profileMenu.style.display === "" ? "flex" : "none";
 });
 
     document.addEventListener("click", function() {

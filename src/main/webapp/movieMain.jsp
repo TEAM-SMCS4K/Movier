@@ -8,8 +8,8 @@
 <header>
     <jsp:include page="navTabBar.jsp"></jsp:include>
     <div id="profile_menu" class="profile_menu" style="display: none;">
-        <button onclick="goToMyPage()">마이페이지</button>
-        <button onclick="logout()">로그아웃</button>
+        <button id="mypage_button" onclick="goToMyPage()">마이페이지</button>
+        <button id="login_button" onclick="logout()">로그아웃</button>
     </div>
 </header>
 <div class="main">
