@@ -15,7 +15,7 @@
     <div class="movier-logo">
         <img src="img/movier_white_logo.svg" alt="Movier Logo">
     </div>
-    <div class="profile">
+    <div class="profile" id="profile">
         <img src="img/default_profile_img.svg" class="profile_img">
         <p class="nickname">갈라파고스의 소시지님</p>
     </div>
