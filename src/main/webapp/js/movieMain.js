@@ -24,10 +24,16 @@ document.addEventListener("DOMContentLoaded", function() {
 function goToMyPage() {
     const profileMenu = document.getElementById("profile_menu");
     profileMenu.style.display = "none";
-    window.location.href = "myPage.jsp"; // 마이페이지로 이동
-
+    window.location.href = "myPage.jsp"; // 마이페이지
 }
 
 function logout() {
-    alert("logout");
+    alert("로그아웃합니다.");
+}
+
+function login() {
+    window.location.href = 'login.jsp';
+    const profileMenu = document.getElementById("profile_menu");
+    profileMenu.style.display = "none";
+    window.location.href = "socialLogin.jsp"; // 소셜로그인 페이지
 }
