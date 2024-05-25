@@ -1,19 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kwonjeong
-  Date: 5/20/24
-  Time: 2:52 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Main Movie List</title>
     <link rel="stylesheet" href="css/movieMain.css">
 </head>
-<body>
+<body class="main-page">
 <header>
     <jsp:include page="navTabBar.jsp"></jsp:include>
+    <div id="profile_menu" class="profile_menu" style="display: none;">
+        <button onclick="goToMyPage()">마이페이지</button>
+        <button onclick="logout()">로그아웃</button>
+    </div>
 </header>
 <div class="main">
     <img src="img/movier_logo.svg" alt="logo" class="logo">
@@ -30,6 +27,7 @@
         </div>
     </div>
 </div>
-<script src="js/main.js"></script>
+
+<script src="js/movieMain.js"></script>
 </body>
 </html>
