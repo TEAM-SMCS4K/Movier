@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="cs.sookmyung.movier.dao.MemberDAO" %>
-<%@ page import="cs.sookmyung.movier.model.Member" %>
 <html>
 <head>
     <title>Main Movie List</title>
@@ -9,40 +7,6 @@
 <body class="main-page">
 <header>
     <jsp:include page="navTabBar.jsp"></jsp:include>
-
-    <%
-        Integer memberId = (Integer) session.getAttribute("member_id");
-        boolean isLoggedIn = false;
-        String alertMessage = "";
-
-        if (memberId == null) {
-            isLoggedIn = false;
-        } else {
-            MemberDAO memberDao = MemberDAO.getInstance();
-            Member member = memberDao.getMemberById(memberId);
-            if (member != null) {
-                isLoggedIn = true;
-                request.setAttribute("member", member);
-            } else {
-                isLoggedIn = false;
-            }
-        }
-    %>
-
-    <div id="profile_menu" class="profile_menu" style="display: none;">
-        <%
-            if (isLoggedIn) {
-        %>
-        <button id="mypage_button" onclick="goToMyPage()">마이페이지</button>
-        <button id="logout_button" onclick="logout()">로그아웃</button>
-        <%
-        } else {
-        %>
-        <button id="login_button" onclick="login()">로그인</button>
-        <%
-            }
-        %>
-    </div>
 </header>
 <div class="main">
     <img src="img/movier_logo.svg" alt="logo" class="logo">
@@ -59,7 +23,6 @@
         </div>
     </div>
 </div>
-
 <script src="js/movieMain.js"></script>
 </body>
 </html>
