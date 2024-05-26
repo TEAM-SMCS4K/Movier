@@ -4,6 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/css/navTabBar.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body>
 <div class="nav_tab_var">
@@ -11,27 +12,33 @@
         <img src="img/movier_white_logo.svg" alt="Movier Logo">
     </div>
     <div class="profile" id="profile">
-        <img src="img/default_profile_img.svg" class="profile_img">
-        <p class="nickname">갈라파고스의 소시지님</p>
-    </div>
-    <%
-        Integer memberId = (Integer) session.getAttribute("member_id");
-        boolean isLoggedIn = false;
+        <%
+            Integer memberId = (Integer) session.getAttribute("member_id");
+            boolean isLoggedIn = false;
+            Member member = null;
 
-        if (memberId == null) {
-            isLoggedIn = false;
-        } else {
-            MemberDAO memberDao = MemberDAO.getInstance();
-            Member member = memberDao.getMemberById(memberId);
-            if (member != null) {
-                isLoggedIn = true;
-                request.setAttribute("member", member);
-            } else {
-                isLoggedIn = false;
+            if (memberId != null) {
+                MemberDAO memberDao = MemberDAO.getInstance();
+                member = memberDao.getMemberById(memberId);
+                if (member != null) {
+                    isLoggedIn = true;
+                    request.setAttribute("member", member);
+                }
             }
-        }
-    %>
 
+            if (isLoggedIn) {
+        %>
+        <img src="<%= member.getProfileImg() != null ? member.getProfileImg() : "img/default_profile_img.svg" %>" class="profile_img" alt="Profile Picture">
+        <p class="nickname"><%= member.getNickname() %> 님</p>
+        <%
+        } else {
+        %>
+        <img src="img/default_profile_img.svg" class="profile_img" alt="Default Profile Picture">
+        <p class="nickname">로그인이 필요합니다</p>
+        <%
+            }
+        %>
+    </div>
     <div id="profile_menu" class="profile_menu" style="display: none;">
         <%
             if (isLoggedIn) {

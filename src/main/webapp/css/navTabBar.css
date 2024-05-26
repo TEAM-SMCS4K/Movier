@@ -11,7 +11,6 @@
 .profile{
     display: flex;
     align-items: center;
-    width: 221px;
     height: 28px;
     margin-right: 200px;
     cursor: pointer;
@@ -21,6 +20,7 @@
     margin-right: 10px;
     width: 28px;
     height: 28px;
+    border-radius: 50%;
 }
 
 .movier-logo{
