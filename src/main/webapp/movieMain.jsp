@@ -3,6 +3,7 @@
 <head>
     <title>Main Movie List</title>
     <link rel="stylesheet" href="css/movieMain.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body class="main-page">
 <header>

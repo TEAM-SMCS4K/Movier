@@ -4,6 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/css/navTabBar.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body>
 <div class="nav_tab_var">
