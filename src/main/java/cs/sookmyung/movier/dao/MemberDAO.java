@@ -75,4 +75,18 @@ public class MemberDAO {
         }
         return null;
     }
+
+    public String getMemberNameById(int memberId) {
+        String sql = "SELECT member_name FROM members WHERE member_id = ?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, memberId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("member_name");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "회원 정보를 가져오는 중에 오류가 발생했습니다.", e);
+        }
+        return null;
+    }
 }

@@ -40,10 +40,6 @@ public abstract class Review {
         return reviewContent;
     }
 
-    public Date getReviewCreatedAt() {
-        return reviewCreatedAt;
-    }
-
     public String getFormattedReviewCreatedAt() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(reviewCreatedAt);
