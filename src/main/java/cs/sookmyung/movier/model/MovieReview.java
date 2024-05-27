@@ -11,4 +11,12 @@ public class MovieReview extends Review{
         this.reviewerName = reviewerName;
         this.sympathyCount = sympathyCount;
     }
+
+    public String getReviewerName() {
+        return reviewerName;
+    }
+
+    public int getSympathyCount() {
+        return sympathyCount;
+    }
 }
