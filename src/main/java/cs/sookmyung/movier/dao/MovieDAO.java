@@ -19,7 +19,8 @@ public class MovieDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MovieDAO.class);
 
-    private MovieDAO() {}
+    private MovieDAO() {
+    }
 
     public static synchronized MovieDAO getInstance() {
         if (instance == null) {
@@ -108,4 +109,33 @@ public class MovieDAO {
         }
         return movieList;
     }
+
+    public List<MovieList> getSearchMovies(String keyword) {
+        List<MovieList> movieList = new ArrayList<>();
+        String sql = "{call get_search_movie_list_cursor(?, ?)}";
+
+        try (Connection connection = getConnection();
+             CallableStatement callableStatement = connection.prepareCall(sql)) {
+
+            callableStatement.setString(1, keyword);  // 첫 번째 매개변수 설정
+            callableStatement.registerOutParameter(2, Types.REF_CURSOR);  // 두 번째 매개변수 설정
+            callableStatement.execute();
+
+            try (ResultSet resultSet = (ResultSet) callableStatement.getObject(2)) {
+                while (resultSet.next()) {
+                    MovieList movie = new MovieList(
+                            resultSet.getInt("id"),
+                            resultSet.getString("title"),
+                            resultSet.getString("posterImg"),
+                            resultSet.getDouble("rating")
+                    );
+                    movieList.add(movie);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("영화 목록을 가져오는데 실패했습니다.", e);
+        }
+        return movieList;
+    }
+
 }
