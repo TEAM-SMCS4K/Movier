@@ -82,7 +82,7 @@
             <div class="filter-bar">
                 <label for="review-slider" class="rating-label">별점 필터</label>
                 <img src="img/icn_star_full.svg"/>
-                <p id="rating-value">2.5</p>
+                <p id="rating-value">0.0</p>
                 <input id="review-slider" type="range" min="0" max="5" step="0.5" value="2.5">
             </div>
             <button class="apply-button">적용하기</button>
