@@ -1,5 +1,6 @@
 package cs.sookmyung.movier.dao;
 
+import cs.sookmyung.movier.model.MovieReview;
 import cs.sookmyung.movier.model.Review;
 import cs.sookmyung.movier.config.ConfigLoader;
 
@@ -49,6 +50,45 @@ public class ReviewDAO {
                         rs.getDouble("review_rating"),
                         rs.getString("review_content"),
                         rs.getDate("review_created_at")
+                );
+                reviews.add(review);
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Database driver not found", e);
+            throw new SQLException(e);
+        }
+        return reviews;
+    }
+
+    public List<MovieReview> getReviewsByMovieId(int movieId) throws SQLException {
+        List<MovieReview> reviews = new ArrayList<>();
+        SympathyDAO sympathyDAO = SympathyDAO.getInstance();
+        MemberDAO memberDAO = MemberDAO.getInstance();
+
+        String sql = "{ call get_reviews_by_movie_id(?, ?) }";
+        try (Connection connection = getConnection();
+             CallableStatement cstmt = connection.prepareCall(sql)) {
+            cstmt.setInt(1, movieId);
+            cstmt.registerOutParameter(2, Types.REF_CURSOR);
+            cstmt.execute();
+
+            ResultSet rs = (ResultSet) cstmt.getObject(2);
+            while (rs.next()) {
+                int review_id = rs.getInt("review_id");
+                int sympathy_count = sympathyDAO.getSympathyCount(review_id);
+
+                int member_id = rs.getInt("member_id");
+                String reviewer_name = memberDAO.getMemberNameById(member_id);
+
+                MovieReview review = new MovieReview(
+                        review_id,
+                        member_id,
+                        rs.getInt("movie_id"),
+                        rs.getDouble("review_rating"),
+                        rs.getString("review_content"),
+                        rs.getDate("review_created_at"),
+                        reviewer_name,
+                        sympathy_count
                 );
                 reviews.add(review);
             }
