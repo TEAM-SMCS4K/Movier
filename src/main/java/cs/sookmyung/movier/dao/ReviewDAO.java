@@ -1,11 +1,14 @@
 package cs.sookmyung.movier.dao;
 
+import cs.sookmyung.movier.model.Member;
 import cs.sookmyung.movier.model.Review;
 import cs.sookmyung.movier.config.ConfigLoader;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,5 +60,31 @@ public class ReviewDAO {
             throw new SQLException(e);
         }
         return reviews;
+    }
+
+    public int insertReview(Review review) {
+        String sql = "{ call insert_review(?, ?, ?, ?, ?, ?) }";
+
+        try (Connection conn = getConnection();
+             CallableStatement cstmt = conn.prepareCall(sql)) {
+            cstmt.setInt(1, review.getMemberId());
+            cstmt.setInt(2, review.getMovieId());
+            cstmt.setDouble(3, review.getReviewRating());
+            cstmt.setString(4, review.getReviewContent());
+            cstmt.setDate(5, new java.sql.Date(review.getReviewCreatedAt().getTime()));
+            cstmt.registerOutParameter(6, Types.INTEGER);
+            cstmt.execute();
+            return cstmt.getInt(6);
+        } catch (SQLException e){
+            if (e.getErrorCode() == 20001) {
+                LOGGER.error("Error: 리뷰를 입력해주세요.", e);
+            } else {
+                LOGGER.error("리뷰 등록 중에 오류가 발생했습니다.", e);
+            }
+            return -1;
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Database driver not found", e);
+            return -1;
+        }
     }
 }
