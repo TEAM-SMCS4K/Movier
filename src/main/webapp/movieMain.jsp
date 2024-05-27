@@ -1,17 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kwonjeong
-  Date: 5/20/24
-  Time: 2:52 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Main Movie List</title>
     <link rel="stylesheet" href="css/movieMain.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
-<body>
+<body class="main-page">
 <header>
     <jsp:include page="navTabBar.jsp"></jsp:include>
 </header>
@@ -30,6 +24,6 @@
         </div>
     </div>
 </div>
-<script src="js/main.js"></script>
+<script src="js/movieMain.js"></script>
 </body>
 </html>

@@ -11,15 +11,16 @@
 .profile{
     display: flex;
     align-items: center;
-    width: 221px;
     height: 28px;
     margin-right: 200px;
+    cursor: pointer;
 }
 
 .profile_img{
     margin-right: 10px;
     width: 28px;
     height: 28px;
+    border-radius: 50%;
 }
 
 .movier-logo{
@@ -33,4 +34,45 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
+}
+
+.profile_menu {
+    display: none; /* 기본적으로 메뉴를 숨김 */
+    position: fixed; /* 뷰 위에 고정 */
+    flex-direction: column;
+    align-items: center; /* 자식 요소들을 수직 방향으로 가운데 정렬 */
+    top: 78px; /* 원하는 위치에 배치 */
+    right: 200px; /* 오른쪽 끝으로 배치 */
+    width: 150px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #E3E3E3;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+#mypage_button, #login_button, #logout_button {
+    width: 100%; /* 버튼을 부모 요소의 가로 폭에 맞춤 */
+    background-color: #FFFFFF;
+    font-size: 16px;
+    color: #666060;
+    border: none;
+    cursor: pointer;
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    font-weight: 500;
+}
+
+#mypage_button {
+    margin-top: 17px;
+}
+
+#login_button {
+    margin-top: 10px;
+    margin-bottom: 17px;
+    padding-top: 10px;
+}
+
+#logout_button {
+    margin-top: 10px;
+    margin-bottom: 17px;
+    padding-top: 10px;
 }
