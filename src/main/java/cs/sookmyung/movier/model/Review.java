@@ -3,19 +3,19 @@ package cs.sookmyung.movier.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Review {
-    private int reviewId;
-    private String posterImg;
-    private String title;
-    private double rating;
-    private String reviewContent;
-    private Date reviewCreatedAt;
+public abstract class Review {
+    protected int reviewId;
+    protected int memberId;
+    protected int movieId;
+    protected double reviewRating;
+    protected String reviewContent;
+    protected Date reviewCreatedAt;
 
-    public Review(int reviewId, String posterImg, String title, double rating, String reviewContent, Date reviewCreatedAt) {
+    public Review(int reviewId, int memberId, int movieId, double reviewRating, String reviewContent, Date reviewCreatedAt) {
         this.reviewId = reviewId;
-        this.posterImg = posterImg;
-        this.title = title;
-        this.rating = rating;
+        this.memberId = memberId;
+        this.movieId = movieId;
+        this.reviewRating = reviewRating;
         this.reviewContent = reviewContent;
         this.reviewCreatedAt = reviewCreatedAt;
     }
@@ -24,20 +24,24 @@ public class Review {
         return reviewId;
     }
 
-    public String getPosterImg() {
-        return posterImg;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public String getTitle() {
-        return title;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public double getRating() {
-        return rating;
+    public double getReviewRating() {
+        return reviewRating;
     }
 
     public String getReviewContent() {
         return reviewContent;
+    }
+
+    public Date getReviewCreatedAt() {
+        return reviewCreatedAt;
     }
 
     public String getFormattedReviewCreatedAt() {
