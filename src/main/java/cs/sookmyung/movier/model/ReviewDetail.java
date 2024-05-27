@@ -3,7 +3,7 @@ package cs.sookmyung.movier.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ReviewDetail extends MyPageReview{
+public class ReviewDetail extends MyPageReview {
     private String genre;
     private Date releaseDate;
     private int runningTime;
