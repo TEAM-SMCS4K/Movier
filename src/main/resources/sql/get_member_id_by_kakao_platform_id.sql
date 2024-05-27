@@ -11,7 +11,8 @@ WHERE kakao_platform_id = p_kakao_platform_id;
 RETURN v_member_id;
 EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            return NULL;
+            return -1;
+            RAISE_APPLICATION_ERROR(-20001, 'Error finding member: ' || SQLERRM);
 WHEN OTHERS THEN
             RAISE;
 END;

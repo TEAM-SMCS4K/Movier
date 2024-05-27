@@ -1,6 +1,6 @@
 package cs.sookmyung.movier.dao;
 
-import cs.sookmyung.movier.model.Review;
+import cs.sookmyung.movier.model.MyPageReview;
 import cs.sookmyung.movier.config.ConfigLoader;
 
 import java.sql.*;
@@ -31,8 +31,24 @@ public class ReviewDAO {
         return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
     }
 
-    public List<Review> getReviewsByMemberId(int memberId) throws SQLException {
-        List<Review> reviews = new ArrayList<>();
+    public int getReviewCountByMemberId(int memberId) throws SQLException {
+        int reviewCount = 0;
+        String sql = "{ call get_review_count_by_member_id(?, ?) }";
+        try (Connection connection = getConnection();
+             CallableStatement cstmt = connection.prepareCall(sql)) {
+            cstmt.setInt(1, memberId);
+            cstmt.registerOutParameter(2, Types.INTEGER);
+            cstmt.execute();
+            reviewCount = cstmt.getInt(2);
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Database driver not found", e);
+            throw new SQLException(e);
+        }
+        return reviewCount;
+    }
+
+    public List<MyPageReview> getMyPageReviewsByMemberId(int memberId) throws SQLException {
+        List<MyPageReview> reviews = new ArrayList<>();
         String sql = "{ call get_reviews_by_member_id(?, ?) }";
         try (Connection connection = getConnection();
              CallableStatement cstmt = connection.prepareCall(sql)) {
@@ -42,13 +58,15 @@ public class ReviewDAO {
 
             ResultSet rs = (ResultSet) cstmt.getObject(2);
             while (rs.next()) {
-                Review review = new Review(
+                MyPageReview review = new MyPageReview(
                         rs.getInt("review_id"),
-                        rs.getString("movie_poster_img"),
-                        rs.getString("movie_name"),
+                        rs.getInt("member_id"),
+                        rs.getInt("movie_id"),
                         rs.getDouble("review_rating"),
                         rs.getString("review_content"),
-                        rs.getDate("review_created_at")
+                        rs.getDate("review_created_at"),
+                        rs.getString("movie_poster_img"),
+                        rs.getString("movie_name")
                 );
                 reviews.add(review);
             }
