@@ -1,4 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="cs.sookmyung.movier.dao.MovieDAO" %>
+<%@ page import="cs.sookmyung.movier.model.MovieList" %>
+<%
+    MovieDAO movieDAO = MovieDAO.getInstance();
+    List<MovieList> movieList = movieDAO.getMovieList();
+    request.setAttribute("movieList", movieList);
+%>
 <html>
 <head>
     <title>Main Movie List</title>
@@ -18,7 +26,10 @@
     <div class="movie_list">
         <span class="movie_list_title">무비차트</span>
         <div class="movie_list_grid">
-            <% for (int i = 0; i < 30; i++) { %>
+            <%
+                for (MovieList movie : movieList) {
+                    request.setAttribute("movie", movie);
+            %>
             <jsp:include page="movieListCell.jsp"></jsp:include>
             <% } %>
         </div>
