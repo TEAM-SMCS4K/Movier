@@ -7,6 +7,8 @@ import cs.sookmyung.movier.config.ConfigLoader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import oracle.jdbc.OracleTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,29 +63,25 @@ public class ReviewDAO {
 //        return reviews;
 //    }
 
-    public List<MovieReview> getReviewsByMovieIdSortedByRating(int movieId, double minRating) {
+    public List<MovieReview> getSortedReviewsByMovieId(int movieId, double minRating, String option) {
         List<MovieReview> reviews = new ArrayList<>();
         SympathyDAO sympathyDAO = SympathyDAO.getInstance();
         MemberDAO memberDAO = MemberDAO.getInstance();
+        String cs;
 
-        String plsql =
-                "DECLARE " +
-                        "    review_cursor SYS_REFCURSOR; " +
-                        "BEGIN " +
-                        "    OPEN review_cursor FOR " +
-                        "        SELECT reviewer_id, review_id, review_text, rating, movie_id, review_created_at " +
-                        "        FROM reviews " +
-                        "        WHERE movie_id = ? AND rating >= ? " +
-                        "        ORDER BY rating DESC; " +
-                        "    ? := review_cursor; " +
-                        "END;";
+        if(option.equals("rating")){
+            cs = getSortedByRatingPLSQL();
+        } else {
+            cs = getSortedByLatestPLSQL();
+        }
 
         try (Connection connection = getConnection();
-             CallableStatement cstmt = connection.prepareCall(plsql)) {
+             CallableStatement cstmt = connection.prepareCall(cs)) {
 
             cstmt.setInt(1, movieId);
             cstmt.setDouble(2, minRating);
             cstmt.registerOutParameter(3, Types.REF_CURSOR);
+
             cstmt.execute();
 
             try (ResultSet rs = (ResultSet) cstmt.getObject(3)) {
@@ -98,8 +96,8 @@ public class ReviewDAO {
                             review_id,
                             reviewer_id,
                             rs.getInt("movie_id"),
-                            rs.getDouble("rating"),
-                            rs.getString("review_text"),
+                            rs.getDouble("review_rating"),
+                            rs.getString("review_content"),
                             rs.getDate("review_created_at"),
                             reviewer_name,
                             sympathy_count
@@ -113,55 +111,12 @@ public class ReviewDAO {
         return reviews;
     }
 
-    public List<MovieReview> getReviewsByMovieIdSortedByCreatedAt(int movieId, double minRating) {
-        List<MovieReview> reviews = new ArrayList<>();
-        SympathyDAO sympathyDAO = SympathyDAO.getInstance();
-        MemberDAO memberDAO = MemberDAO.getInstance();
-
-        String plsql =
-                "DECLARE " +
-                        "    review_cursor SYS_REFCURSOR; " +
-                        "BEGIN " +
-                        "    OPEN review_cursor FOR " +
-                        "        SELECT reviewer_id, review_id, review_text, rating, movie_id, review_created_at " +
-                        "        FROM reviews " +
-                        "        WHERE movie_id = ? AND rating >= ? " +
-                        "        ORDER BY review_created_at DESC; " +
-                        "    ? := review_cursor; " +
-                        "END;";
-
-        try (Connection connection = getConnection();
-             CallableStatement cstmt = connection.prepareCall(plsql)) {
-
-            cstmt.setInt(1, movieId);
-            cstmt.setDouble(2, minRating);
-            cstmt.registerOutParameter(3, Types.REF_CURSOR);
-            cstmt.execute();
-
-            try (ResultSet rs = (ResultSet) cstmt.getObject(3)) {
-                while (rs.next()) {
-                    int review_id = rs.getInt("review_id");
-                    int sympathy_count = sympathyDAO.getSympathyCount(review_id);
-
-                    int reviewer_id = rs.getInt("reviewer_id");
-                    String reviewer_name = memberDAO.getMemberNameById(reviewer_id);
-
-                    MovieReview review = new MovieReview(
-                            review_id,
-                            reviewer_id,
-                            rs.getInt("movie_id"),
-                            rs.getDouble("rating"),
-                            rs.getString("review_text"),
-                            rs.getDate("review_created_at"),
-                            reviewer_name,
-                            sympathy_count
-                    );
-                    reviews.add(review);
-                }
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            LOGGER.error("Database driver not found", e);
-        }
-        return reviews;
+    private String getSortedByLatestPLSQL() {
+        return "{ call get_latest_reviews_by_movie_id(?, ?, ?) }";
     }
+
+    private String getSortedByRatingPLSQL(){
+        return "{ call get_rating_reviews_by_movie_id(?, ?, ?) }";
+    }
+
 }
