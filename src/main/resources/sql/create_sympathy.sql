@@ -1,3 +1,3 @@
-CREATE SYMPATHY(
-    p_member_id IN NUMBER,
-    p_review_id IN NUMBER);
+CREATE TABLE SYMPATHY(
+    p_member_id NUMBER,
+    p_review_id NUMBER);
