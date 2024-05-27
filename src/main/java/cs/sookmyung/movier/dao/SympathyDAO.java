@@ -29,7 +29,7 @@ public class SympathyDAO {
     }
 
     public int getSympathyCount(int reviewId) {
-        String sql = "SELECT sympathy_count FROM sympathy_count_view WHERE review_id = ?";
+        String sql = "SELECT sympathy_count FROM sympathy_count_view WHERE p_review_id = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, reviewId);

@@ -61,7 +61,7 @@ public class ReviewDAO {
 //        return reviews;
 //    }
 
-    public List<MovieReview> getReviewsByMovieIdSortedByRating(int movieId, double minRating) throws SQLException {
+    public List<MovieReview> getReviewsByMovieIdSortedByRating(int movieId, double minRating) {
         List<MovieReview> reviews = new ArrayList<>();
         SympathyDAO sympathyDAO = SympathyDAO.getInstance();
         MemberDAO memberDAO = MemberDAO.getInstance();
@@ -107,14 +107,13 @@ public class ReviewDAO {
                     reviews.add(review);
                 }
             }
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             LOGGER.error("Database driver not found", e);
-            throw new SQLException(e);
         }
         return reviews;
     }
 
-    public List<MovieReview> getReviewsByMovieIdSortedByCreatedAt(int movieId, double minRating) throws SQLException {
+    public List<MovieReview> getReviewsByMovieIdSortedByCreatedAt(int movieId, double minRating) {
         List<MovieReview> reviews = new ArrayList<>();
         SympathyDAO sympathyDAO = SympathyDAO.getInstance();
         MemberDAO memberDAO = MemberDAO.getInstance();
@@ -160,9 +159,8 @@ public class ReviewDAO {
                     reviews.add(review);
                 }
             }
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             LOGGER.error("Database driver not found", e);
-            throw new SQLException(e);
         }
         return reviews;
     }
