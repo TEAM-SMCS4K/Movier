@@ -1,8 +1,22 @@
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: SUIT;
     background-color: #F8F8F8;
-    margin: 0;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex: 1;
 }
 
 .nav_tab_var .movier-logo {
@@ -52,6 +66,7 @@ body {
     background-color: #fff;
     padding: 50px 100px;
     box-sizing: border-box;
+    min-height: calc(100vh - 350px);
 }
 
 .reviews h2 {
@@ -67,6 +82,12 @@ body {
     gap: 80px 40px;
     justify-items: center;
     margin: 60px 180px 60px 180px;
+}
+
+.write-review {
+    color: #666060;
+    font-weight: 300;
+    font-size: 20px;
 }
 
 .review {

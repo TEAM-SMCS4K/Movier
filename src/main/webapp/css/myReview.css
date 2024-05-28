@@ -1,3 +1,87 @@
+body {
+    font-family: 'SUIT', sans-serif;
+    background: transparent;
+    margin: 0;
+}
+
+.background-container {
+    width: 100vw;
+    height: 100%;
+}
+
+.background-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.review-card {
+    background-color: #fff;
+    border-radius: 20px;
+    margin: 16px 200px;
+    padding: 50px;
+    height: 619px;
+    color: #000;
+    position: relative;
+}
+
+.review-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.star-container {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 19px;
+}
+
+.half-star-container {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+}
+
+.half-star {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: inset(0 50% 0 0);
+}
+
+.half-star-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: inset(0 0 0 50%);
+}
+
+.review-text {
+    font-family: 'SUIT';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    color: #151212;
+}
+
+.review-submit {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
+
 .edit-button {
     background: #F16060;
     border-radius: 30px;
