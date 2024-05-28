@@ -1,5 +1,6 @@
 package cs.sookmyung.movier.dao;
 
+import cs.sookmyung.movier.model.MovieReview;
 import cs.sookmyung.movier.model.MyPageReview;
 import cs.sookmyung.movier.config.ConfigLoader;
 
@@ -75,5 +76,60 @@ public class ReviewDAO {
             throw new SQLException(e);
         }
         return reviews;
+    }
+
+    public List<MovieReview> getSortedReviewsByMovieId(int movieId, double minRating, String option) {
+        List<MovieReview> reviews = new ArrayList<>();
+        SympathyDAO sympathyDAO = SympathyDAO.getInstance();
+        MemberDAO memberDAO = MemberDAO.getInstance();
+        String cs;
+
+        if(option.equals("rating")){
+            cs = getSortedByRatingPLSQL();
+        } else {
+            cs = getSortedByLatestPLSQL();
+        }
+
+        try (Connection connection = getConnection();
+             CallableStatement cstmt = connection.prepareCall(cs)) {
+
+            cstmt.setInt(1, movieId);
+            cstmt.setDouble(2, minRating);
+            cstmt.registerOutParameter(3, Types.REF_CURSOR);
+            cstmt.execute();
+
+            try (ResultSet rs = (ResultSet) cstmt.getObject(3)) {
+                while (rs.next()) {
+                    int review_id = rs.getInt("review_id");
+                    int sympathy_count = sympathyDAO.getSympathyCount(review_id);
+
+                    int reviewer_id = rs.getInt("reviewer_id");
+                    String reviewer_name = memberDAO.getMemberNameById(reviewer_id);
+
+                    MovieReview review = new MovieReview(
+                            review_id,
+                            reviewer_id,
+                            rs.getInt("movie_id"),
+                            rs.getDouble("review_rating"),
+                            rs.getString("review_content"),
+                            rs.getDate("review_created_at"),
+                            reviewer_name,
+                            sympathy_count
+                    );
+                    reviews.add(review);
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            LOGGER.error("Database driver not found", e);
+        }
+        return reviews;
+    }
+
+    private String getSortedByLatestPLSQL() {
+      return "{ call get_latest_reviews_by_movie_id(?, ?, ?) }";
+    }
+
+    private String getSortedByRatingPLSQL(){
+      return "{ call get_rating_reviews_by_movie_id(?, ?, ?) }";
     }
 }
