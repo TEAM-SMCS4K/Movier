@@ -77,6 +77,18 @@ p{
     background: #F16060;
     border-radius: 54px;
     color: #FFFFFF;
+    cursor: pointer;
+}
+
+.dislike-button{
+    margin-left: 10px;
+    width: 88px;
+    height: 32px;
+    border: none;
+    background: #AFA8A8;
+    border-radius: 54px;
+    color: #151212;
+    cursor: pointer;
 }
 
 .review-separator{
