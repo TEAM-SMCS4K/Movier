@@ -19,7 +19,7 @@
     <jsp:include page="navTabBar.jsp"/>
 </header>
 <div class="main">
-    <img src="img/movier_logo.svg" alt="logo" class="logo">
+    <img src="img/movier_logo.svg" alt="logo" class="logo" id="logo_image" style="cursor:pointer;" >
     <div class="searchBox">
         <img src="img/icn_search.svg" alt="search" class="search_icon">
         <input type="text" id="search_input" placeholder="영화의 제목을 입력하세요.">
@@ -31,7 +31,7 @@
 <script>
     $(document).ready(function() {
         const searchInput = document.getElementById("search_input");
-        const movieListTitle = document.querySelector(".movie_list_title");
+        const logoImage = document.getElementById("logo_image")
 
         // 검색 실행 함수
         function performSearch() {
@@ -65,6 +65,10 @@
                 }
             });
         }
+
+        logoImage.addEventListener("click", function() {
+            location.reload();
+        });
     });
 </script>
 </body>
