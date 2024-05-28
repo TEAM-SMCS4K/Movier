@@ -23,11 +23,20 @@
         message = userName + "님의 의견도 알려주세요!";
         buttonText = "리뷰 작성하기";
     }
-
 %>
 <div class="review-request">
     <p><span>범죄도시 4</span> 재미있게 보셨나요?<br> <%= message %></p>
-    <button class="<%= isLoggedIn ? "review-request-button" : "login-request-button" %>"><%= buttonText %></button>
+    <button class="<%= isLoggedIn ? "review-request-button" : "login-request-button" %>" onclick="handleButtonClick()"><%= buttonText %></button>
 </div>
+<script type="text/javascript">
+    function handleButtonClick() {
+        var button = document.querySelector(".review-request button");
+        if (button.classList.contains("login-request-button")) {
+            window.location.href = "/socialLogin.jsp";
+        } else if (button.classList.contains("review-request-button")) {
+            window.location.href = "/writeReview.jsp?movieId=<%=request.getParameter("movieId")%>";
+        }
+    }
+</script>
 </body>
 </html>

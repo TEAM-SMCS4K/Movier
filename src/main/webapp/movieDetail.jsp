@@ -59,7 +59,9 @@
         <div class="summary">
             <%=movie.getPlot()%>
         </div>
-        <jsp:include page="/reviewRequest.jsp" />
+        <jsp:include page="/reviewRequest.jsp">
+            <jsp:param name="movieId" value="<%=movieId%>" />
+        </jsp:include>
         <jsp:include page="/reviewList.jsp"/>
     </div>
 </div>
