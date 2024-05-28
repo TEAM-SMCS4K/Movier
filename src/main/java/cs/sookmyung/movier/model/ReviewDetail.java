@@ -7,12 +7,18 @@ public class ReviewDetail extends MyPageReview {
     private String genre;
     private Date releaseDate;
     private int runningTime;
+    private String thumbnailImg;
 
-    public ReviewDetail(int reviewId, int memberId, int movieId, double reviewRating, String reviewContent, Date reviewCreatedAt, String posterImg, String title, String genre, Date releaseDate, int runningTime) {
+    public ReviewDetail(int reviewId, int memberId, int movieId, double reviewRating, String reviewContent, Date reviewCreatedAt, String posterImg, String title, String thumbnailImg, String genre, Date releaseDate, int runningTime) {
         super(reviewId, memberId, movieId, reviewRating, reviewContent, reviewCreatedAt, posterImg, title);
+        this.thumbnailImg = thumbnailImg;
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.runningTime = runningTime;
+    }
+
+    public String getThumbnailImg() {
+        return thumbnailImg;
     }
 
     public String getGenre() {

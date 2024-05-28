@@ -1,11 +1,11 @@
-CREATE OR REPLACE PROCEDURE get_review_count_by_member_id (
-    p_member_id IN NUMBER,
+CREATE OR REPLACE PROCEDURE get_review_count_by_reviewer_id (
+    p_reviewer_id IN NUMBER,
     p_review_count OUT NUMBER
 ) AS
     CURSOR review_cursor IS
         SELECT review_id
         FROM reviews
-        WHERE member_id = p_member_id;
+        WHERE reviewer_id = p_reviewer_id;
     review_id reviews.review_id%TYPE;
 BEGIN
     p_review_count := 0;

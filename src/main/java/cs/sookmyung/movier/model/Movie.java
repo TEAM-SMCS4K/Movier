@@ -24,6 +24,15 @@ public class Movie {
         this.plot = plot;
     }
 
+    public Movie(int id, String title, String posterImg, String genre, Date releaseDate, int runningTime) {
+        this.id = id;
+        this.title = title;
+        this.posterImg = posterImg;
+        this.genre = genre;
+        this.releaseDate = releaseDate;
+        this.runningTime = runningTime;
+    }
+
     public int getId() {
         return id;
     }
