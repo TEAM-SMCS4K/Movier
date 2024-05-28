@@ -57,10 +57,11 @@
                 type: "GET",
                 data: { keyword: searchQuery },
                 success: function(response) {
-                    $(".movie_list").html(response); // 검색 결과를 출력할 영역 업데이트
+                    $(".movie_list").html(response); // 영화 리스트 업데이트
+                    $(".movie_list_title").text("'" + searchQuery + "'에 대한 검색결과"); // title 업데이트
                 },
                 error: function(xhr, status, error) {
-                    alert("검색 과정에서 오류가 발생했습니다. " + xhr.responseText);
+                    alert("검색 과정에서 오류가 발생했습니다.\n" + xhr.responseText);
                 }
             });
         }
