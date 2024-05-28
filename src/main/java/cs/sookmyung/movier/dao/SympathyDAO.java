@@ -44,4 +44,50 @@ public class SympathyDAO {
         }
         return 0;
     }
+
+    public boolean isSympathyExist(int memberId, int reviewId) {
+        String sql = "{ call check_sympathy(?, ?, ?) }";
+        boolean result = false;
+        try (Connection connection = getConnection(); CallableStatement cstmt = connection.prepareCall(sql)) {
+            cstmt.setInt(1, memberId);
+            cstmt.setInt(2, reviewId);
+            cstmt.registerOutParameter(3, Types.INTEGER);
+
+            cstmt.execute();
+
+            int sympathyResult = cstmt.getInt(3);
+            result = (sympathyResult == 1);
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("Failed to check sympathy existence.", e);
+        }
+        return result;
+    }
+
+    public boolean addSympathy(int memberId, int reviewId) {
+        String sql = "INSERT INTO sympathy (p_member_id, p_review_id) VALUES (?, ?)";
+        boolean result = false;
+        try (Connection connection = getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, memberId);
+            pstmt.setInt(2, reviewId);
+            pstmt.executeUpdate();
+            result = true;
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("Failed to add sympathy.", e);
+        }
+        return result;
+    }
+
+    public boolean removeSympathy(int memberId, int reviewId) {
+        String sql = "DELETE FROM sympathy WHERE p_member_id = ? AND p_review_id = ?";
+        boolean result = false;
+        try (Connection connection = getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, memberId);
+            pstmt.setInt(2, reviewId);
+            pstmt.executeUpdate();
+            result = true;
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("Failed to remove sympathy.", e);
+        }
+        return result;
+    }
 }

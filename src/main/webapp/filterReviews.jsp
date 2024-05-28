@@ -47,6 +47,7 @@
         request.setCharacterEncoding("UTF-8");
 %>
 <jsp:include page="reviewComponent.jsp">
+    <jsp:param name="reviewId" value="<%= review.getReviewId() %>" />
     <jsp:param name="reviewer" value="<%= review.getReviewerName() %>" />
     <jsp:param name="rating" value="<%= review.getReviewRating() %>" />
     <jsp:param name="date" value="<%= review.getFormattedReviewCreatedAt() %>" />
