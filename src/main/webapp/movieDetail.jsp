@@ -9,19 +9,6 @@
 <%@ page import="cs.sookmyung.movier.dao.MovieDAO" %>
 <%@ page import="cs.sookmyung.movier.model.Movie" %>
 <%@ page import="cs.sookmyung.movier.model.MovieReviewInfo" %>
-<%
-    int movieId = Integer.parseInt(request.getParameter("movieId"));
-    MovieDAO movieDao = MovieDAO.getInstance();
-    Movie movie = movieDao.getMovieById(movieId);
-    MovieReviewInfo movieReviewInfo = movieDao.getMovieReviewInfoById(movieId);
-
-    if(movie == null || movieReviewInfo == null){
-        response.sendRedirect("/movieMain.jsp");
-        return;
-    }
-
-    double startRatingWidth = (movieReviewInfo.getRatingAverage() / 5) * 100;
-%>
 
 <html>
 <head>
@@ -30,6 +17,24 @@
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body>
+<%
+    int movieId = Integer.parseInt(request.getParameter("movieId"));
+    MovieDAO movieDao = MovieDAO.getInstance();
+    Movie movie = movieDao.getMovieById(movieId);
+    MovieReviewInfo movieReviewInfo = movieDao.getMovieReviewInfoById(movieId);
+
+    if(movie == null || movieReviewInfo == null){
+%>
+<script type="text/javascript">
+    alert("잘못된 접근입니다");
+    window.location.href = "/movieMain.jsp";
+</script>
+<%
+        return;
+    }
+
+    double startRatingWidth = (movieReviewInfo.getRatingAverage() / 5) * 100;
+%>
 <div class="background-container" style="background: url(<%=movie.getThumbnailImg()%>)no-repeat center /cover">
     <jsp:include page="/navTabBar.jsp" />
     <div class="movie-details">
