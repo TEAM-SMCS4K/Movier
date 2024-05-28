@@ -1,6 +1,5 @@
 package cs.sookmyung.movier;
 
-import cs.sookmyung.movier.dao.MemberDAO;
 import cs.sookmyung.movier.dao.ReviewDAO;
 import cs.sookmyung.movier.model.Review;
 
@@ -9,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -34,12 +34,16 @@ public class WriteReviewServlet extends HttpServlet {
             }
         }
 
-        // Review 객체 생성 및 설정
-        Review review = new Review(movieId, memberId, reviewRating, reviewContent, reviewCreatedAt);
+        Review newReview = new Review(movieId, memberId, reviewRating, reviewContent, reviewCreatedAt);
+        int reviewId = reviewDAO.insertReview(newReview);
 
-        // ReviewDAO를 사용하여 데이터베이스에 저장
-        reviewDAO.insertReview(review);
+        if (reviewId != -1) {
+            HttpSession session = request.getSession();
+            session.setAttribute("review_id", reviewId);
+            response.sendRedirect("/myReview.jsp");
+        } else {
+            response.sendError(500, "리뷰 등록에 실패했습니다");
+        }
 
-        response.sendRedirect("/myReview.jsp"); // 성공 페이지로 리디렉션
     }
 }
