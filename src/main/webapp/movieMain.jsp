@@ -53,7 +53,7 @@
         // 여기부텅
         function fetchMovies(searchQuery) {
             $.ajax({
-                url: "searchMovies.jsp",
+                url: "searchMovieLists.jsp",
                 type: "GET",
                 data: { keyword: searchQuery },
                 success: function(response) {
