@@ -29,6 +29,7 @@ public class SympathyDAO {
     }
 
     public int getSympathyCount(int reviewId) {
+        // sympathy_count: 리뷰별 공감수를 리턴하는 뷰
         String sql = "SELECT sympathy_count FROM sympathy_count_view WHERE p_review_id = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
