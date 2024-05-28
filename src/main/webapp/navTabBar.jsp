@@ -9,7 +9,7 @@
 <body>
 <div class="nav_tab_var">
     <div class="movier-logo">
-        <img src="img/movier_white_logo.svg" alt="Movier Logo">
+        <img src="img/movier_white_logo.svg" alt="Movier Logo" id="nav_logo_image" style="cursor:pointer;">
     </div>
     <div class="profile" id="profile">
         <%
@@ -58,10 +58,16 @@
     document.addEventListener("DOMContentLoaded", function() {
         const profile = document.getElementById("profile");
         const profileMenu = document.getElementById("profile_menu");
+        const logoImage = document.getElementById("nav_logo_image");
 
         profile.addEventListener("click", function(event) {
             event.stopPropagation(); // 이벤트 버블링 방지
             profileMenu.style.display = profileMenu.style.display === "none" || profileMenu.style.display === "" ? "flex" : "none";
+        });
+
+        logoImage.addEventListener("click", function(event) {
+            event.stopPropagation();
+            window.location.href = "movieMain.jsp";
         });
 
         document.addEventListener("click", function() {
@@ -101,7 +107,6 @@
         profileMenu.style.display = "none";
         window.location.href = "socialLogin.jsp"; // 소셜로그인 페이지
     }
-
 </script>
 </body>
 </html>
