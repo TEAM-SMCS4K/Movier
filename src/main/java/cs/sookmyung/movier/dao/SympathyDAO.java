@@ -44,4 +44,23 @@ public class SympathyDAO {
         }
         return 0;
     }
+
+    public boolean isSympathyExist(int memberId, int reviewId) {
+        String sql = "{ call check_sympathy(?, ?, ?) }";
+        boolean result = false;
+        try (Connection connection = getConnection(); CallableStatement cstmt = connection.prepareCall(sql)) {
+            cstmt.setInt(1, memberId);
+            cstmt.setInt(2, reviewId);
+            cstmt.registerOutParameter(3, Types.INTEGER);
+
+            cstmt.execute();
+
+            int sympathyResult = cstmt.getInt(3);
+            System.out.println("reviewId =" + reviewId+"sympathyResult = " + sympathyResult);
+            result = (sympathyResult == 1);
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("Failed to check sympathy existence.", e);
+        }
+        return result;
+    }
 }
