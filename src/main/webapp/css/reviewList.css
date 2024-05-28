@@ -60,6 +60,10 @@
     margin-right: 4px;
 }
 
+#rating-value {
+    width: 30px;
+}
+
 #review-slider{
     -webkit-appearance: none;
     appearance: none;
