@@ -44,6 +44,5 @@ public class WriteReviewServlet extends HttpServlet {
         } else {
             response.sendError(500, "리뷰 등록에 실패했습니다");
         }
-
     }
 }
