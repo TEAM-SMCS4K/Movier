@@ -137,5 +137,4 @@ public class MovieDAO {
         }
         return movieList;
     }
-
 }
