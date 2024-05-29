@@ -49,48 +49,50 @@
 <header>
     <jsp:include page="navTabBar.jsp"></jsp:include>
 </header>
-<%
-    if (!redirectToLogin) {
-        Member member = (Member) request.getAttribute("member");
-        List<MyPageReview> myPageReviews = (List<MyPageReview>) request.getAttribute("myPageReviews");
-%>
-<div class="my-profile">
-    <img src="<%= member.getProfileImg() != null ? member.getProfileImg() : "img/profile.svg" %>" alt="Profile Picture" class="profile-pic">
-    <p class="my-profile-nickname"><%= member.getNickname() %></p>
-    <p class="message">축하해요! 지금까지 <%= reviewCount %>개의 리뷰를 작성했네요</p>
-</div>
-<div class="reviews">
-    <h2>내가 작성한 리뷰들</h2>
-    <div class="review-list">
-        <%
-            if (myPageReviews == null || myPageReviews.isEmpty()) {
-        %>
-        <p>영화를 관람하고 <strong><%= member.getNickname() %></strong>님만의 리뷰를 작성해보세요!</p>
-        <%
-        } else {
-            for (MyPageReview myPageReview : myPageReviews) {
-                String truncatedReviewContent = myPageReview.getReviewContent().length() > 80
-                        ? myPageReview.getReviewContent().substring(0, 80) + "･･･"
-                        : myPageReview.getReviewContent();
-        %>
-        <div class="review" onclick="location.href='reviewDetail.jsp?id=<%= myPageReview.getReviewId() %>'">
-            <img src="<%= myPageReview.getPosterImg() != null ? myPageReview.getPosterImg() : "img/movie_poster_dummy.svg" %>" alt="Movie Poster" class="review-poster">
-            <div class="review-details">
-                <div class="title-rating">
-                    <h3><%= myPageReview.getTitle() %></h3>
-                    <span> <img src="img/icn_star_full.svg" alt="Rating Star" class="rating-star"></span>
-                    <span class="rating"><%= myPageReview.getReviewRating() %> / 5</span>
-                </div>
-                <p class="review-content"><%= truncatedReviewContent %></p>
-                <p class="review-date"><%= myPageReview.getFormattedReviewCreatedAt() %> 작성</p>
-            </div>
-        </div>
-        <%
-                }
-            }
-        %>
+<div class="main-content">
+    <%
+        if (!redirectToLogin) {
+            Member member = (Member) request.getAttribute("member");
+            List<MyPageReview> myPageReviews = (List<MyPageReview>) request.getAttribute("myPageReviews");
+    %>
+    <div class="my-profile">
+        <img src="<%= member.getProfileImg() != null ? member.getProfileImg() : "img/profile.svg" %>" alt="Profile Picture" class="profile-pic">
+        <p class="my-profile-nickname"><%= member.getNickname() %></p>
+        <p class="message">축하해요! 지금까지 <%= reviewCount %>개의 리뷰를 작성했네요</p>
     </div>
+    <div class="reviews">
+        <h2>내가 작성한 리뷰들</h2>
+        <div class="review-list">
+            <%
+                if (myPageReviews == null || myPageReviews.isEmpty()) {
+            %>
+            <p class="write-review">영화를 관람하고 <strong><%= member.getNickname() %></strong>님만의 리뷰를 작성해보세요!</p>
+            <%
+            } else {
+                for (MyPageReview myPageReview : myPageReviews) {
+                    String truncatedReviewContent = myPageReview.getReviewContent().length() > 80
+                            ? myPageReview.getReviewContent().substring(0, 80) + "･･･"
+                            : myPageReview.getReviewContent();
+            %>
+            <div class="review" onclick="location.href='myReview.jsp?id=<%= myPageReview.getReviewId() %>'">
+                <img src="<%= myPageReview.getPosterImg() != null ? myPageReview.getPosterImg() : "img/movie_poster_dummy.svg" %>" alt="Movie Poster" class="review-poster">
+                <div class="review-details">
+                    <div class="title-rating">
+                        <h3><%= myPageReview.getTitle() %></h3>
+                        <span> <img src="img/icn_star_full.svg" alt="Rating Star" class="rating-star"></span>
+                        <span class="rating"><%= myPageReview.getReviewRating() %> / 5</span>
+                    </div>
+                    <p class="review-content"><%= truncatedReviewContent %></p>
+                    <p class="review-date"><%= myPageReview.getFormattedReviewCreatedAt() %> 작성</p>
+                </div>
+            </div>
+            <%
+                    }
+                }
+            %>
+        </div>
+    </div>
+    <% } %>
 </div>
-<% } %>
 </body>
 </html>
