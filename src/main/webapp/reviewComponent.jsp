@@ -30,7 +30,7 @@
         <p class="reviewer"><%= request.getParameter("reviewer") %></p>
         <div class="review-rating">
             <img src="img/icn_star_full.svg"/>
-            <p class="rating"><%= request.getParameter("rating") %></p>
+            <p><%= request.getParameter("rating") %></p>
         </div>
     </div>
     <div class="review-date">

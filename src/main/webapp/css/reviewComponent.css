@@ -23,8 +23,9 @@ p{
 
 .reviewer{
     color: #151212;
+    font-style: normal;
+    font-weight: 700;
     font-size: 24px;
-    font-weight: bold;
 }
 
 .review-rating img{
@@ -33,20 +34,25 @@ p{
 }
 
 .review-rating p{
+    font-style: normal;
+    font-weight: 400;
     font-size: 18px;
     color: #F16060;
     margin: 0;
 }
 
 .review-date{
+    font-style: normal;
+    font-weight: 400;
     font-size: 20px;
     color: #AFA8A8;
-    line-height: 28px;
     margin-bottom: 17px;
 }
 
 .review-text{
     color: #666060;
+    font-style: normal;
+    font-weight: 500;
     font-size: 24px;
     line-height: 40px;
     margin-bottom: 27px;
@@ -58,6 +64,8 @@ p{
 }
 
 .review-action p{
+    font-style: normal;
+    font-weight: 400;
     font-size: 16px;
 }
 
@@ -78,6 +86,10 @@ p{
     border-radius: 54px;
     color: #FFFFFF;
     cursor: pointer;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .dislike-button{
@@ -89,6 +101,10 @@ p{
     border-radius: 54px;
     color: #AFA8A8;
     cursor: pointer;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .review-separator{
