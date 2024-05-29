@@ -126,7 +126,7 @@
                 <p><%= reviewDetail.getReviewContent() %></p>
             </div>
             <div class="review-submit">
-                <button class="edit-button" onclick="location.href='editReview.jsp?id=<%= reviewDetail.getReviewId() %>'">수정하기</button>
+                <button class="edit-button" onclick="location.href='editReview.jsp?id=<%= reviewDetail.getReviewId() %>&movieId=<%= reviewDetail.getMovieId() %>'">수정하기</button>
                 <button class="delete-button" onclick="confirmDelete(<%= reviewDetail.getReviewId() %>, <%= memberId %>);">삭제하기</button>
             </div>
         </div>

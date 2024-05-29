@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="cs.sookmyung.movier.dao.ReviewDAO" %>
+<%@ page import="cs.sookmyung.movier.dao.MovieDAO" %>
 <%@ page import="cs.sookmyung.movier.model.Movie" %>
 <%@ page import="java.sql.SQLException" %>
 
@@ -9,10 +9,10 @@
 
     if (movieIdParameter != null && !movieIdParameter.isEmpty()) {
         int movieId = Integer.parseInt(movieIdParameter);
-        ReviewDAO reviewDAO = ReviewDAO.getInstance();
+        MovieDAO movieDAO = MovieDAO.getInstance();
 
         try {
-            movie = reviewDAO.getMovieInfoByReviewId(movieId);
+            movie = movieDAO.getMovieInfoByMovieId(movieId); // getMovieInfoByMovieId 사용
             if (movie == null) {
                 throw new SQLException("No movie found for the given movie ID.");
             }
