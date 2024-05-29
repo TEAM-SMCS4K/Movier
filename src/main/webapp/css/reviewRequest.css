@@ -12,6 +12,7 @@
     color: #ffffff;
     font-size: 32px;
     font-weight: 500;
+    font-style: normal;
     height: 88px;
     margin-left: 200px;
     line-height: 44px;
@@ -20,6 +21,7 @@
 .review-request p span{
     font-weight: 700;
     font-size: 32px;
+    font-style: normal;
 }
 
 .review-request-button {
@@ -39,9 +41,7 @@
     width: 233px;
     height: 74px;
     font-size: 24px;
-    color: #ffffff;
-    background-color: #f16060;
-    border: none;
-    border-radius: 16px;
+    font-style: normal;
+    font-weight: 700;
     cursor: pointer;
 }
