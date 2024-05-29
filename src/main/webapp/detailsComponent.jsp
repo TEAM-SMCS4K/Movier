@@ -4,17 +4,21 @@
 <%@ page import="java.sql.SQLException" %>
 
 <%
-    int reviewId = Integer.parseInt(request.getParameter("id"));
-    ReviewDAO reviewDAO = ReviewDAO.getInstance();
+    String movieIdParameter = request.getParameter("movieId");
     Movie movie = null;
 
-    try {
-        movie = reviewDAO.getMovieInfoByReviewId(reviewId);
-        if (movie == null) {
-            throw new SQLException("No movie found for the given review ID.");
+    if (movieIdParameter != null && !movieIdParameter.isEmpty()) {
+        int movieId = Integer.parseInt(movieIdParameter);
+        ReviewDAO reviewDAO = ReviewDAO.getInstance();
+
+        try {
+            movie = reviewDAO.getMovieInfoByReviewId(movieId);
+            if (movie == null) {
+                throw new SQLException("No movie found for the given movie ID.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
 
     request.setAttribute("movie", movie);

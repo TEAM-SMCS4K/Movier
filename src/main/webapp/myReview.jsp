@@ -93,7 +93,7 @@
     <jsp:include page="/navTabBar.jsp"/>
     <div class="review-card">
         <jsp:include page="/detailsComponent.jsp">
-            <jsp:param name="id" value="<%= reviewDetail.getReviewId() %>"/>
+            <jsp:param name="movieId" value="<%= reviewDetail.getMovieId() %>"/>
         </jsp:include>
         <div class="review-content">
             <h2>나의 별점</h2>
