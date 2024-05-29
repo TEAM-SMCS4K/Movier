@@ -81,34 +81,6 @@ public class ReviewDAO {
         return reviews;
     }
 
-    public Movie getMovieInfoByReviewId(int reviewId) throws SQLException {
-        Movie movie = null;
-        String sql = "{ call get_movie_info_by_review_id(?, ?) }";
-        try (Connection connection = getConnection();
-             CallableStatement cstmt = connection.prepareCall(sql)) {
-            cstmt.setInt(1, reviewId);
-            cstmt.registerOutParameter(2, Types.REF_CURSOR);
-            cstmt.execute();
-
-            try (ResultSet rs = (ResultSet) cstmt.getObject(2)) {
-                if (rs.next()) {
-                    movie = new Movie(
-                            rs.getInt("movie_id"),
-                            rs.getString("movie_name"),
-                            rs.getString("movie_poster_img"),
-                            rs.getString("movie_genre"),
-                            rs.getDate("movie_release_date"),
-                            rs.getInt("movie_running_time")
-                    );
-                }
-            }
-        } catch (ClassNotFoundException e) {
-            LOGGER.error("Database driver not found", e);
-            throw new SQLException(e);
-        }
-        return movie;
-    }
-
     public ReviewDetail getReviewDetailsByMemberId(int reviewId, int memberId) throws SQLException {
         ReviewDetail reviewDetail = null;
         String sql = "{ call get_review_details_by_reviewer_id(?, ?, ?) }";
@@ -123,17 +95,10 @@ public class ReviewDAO {
                 if (rs.next()) {
                     reviewDetail = new ReviewDetail(
                             rs.getInt("review_id"),
-                            rs.getInt("reviewer_id"),
                             rs.getInt("movie_id"),
                             rs.getDouble("review_rating"),
                             rs.getString("review_content"),
-                            rs.getDate("review_created_at"),
-                            rs.getString("movie_poster_img"),
-                            rs.getString("movie_name"),
-                            rs.getString("movie_thumbnail_img"),
-                            rs.getString("movie_genre"),
-                            rs.getDate("movie_release_date"),
-                            rs.getInt("movie_running_time")
+                            rs.getString("movie_thumbnail_img")
                     );
                 }
             }
@@ -143,6 +108,7 @@ public class ReviewDAO {
         }
         return reviewDetail;
     }
+
 
     public boolean deleteReviewById(int reviewId, int memberId) {
         String sql = "DELETE FROM reviews WHERE review_id = ? AND reviewer_id = ?";
