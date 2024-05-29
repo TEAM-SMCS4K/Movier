@@ -78,4 +78,32 @@ public class MovieDAO {
         }
         return null;
     }
+
+    public Movie getMovieInfoByMovieId(int movieId) throws SQLException {
+        Movie movie = null;
+        String sql = "{ call get_movie_info_by_movie_id(?, ?) }";
+        try (Connection connection = getConnection();
+             CallableStatement cstmt = connection.prepareCall(sql)) {
+            cstmt.setInt(1, movieId);
+            cstmt.registerOutParameter(2, Types.REF_CURSOR);
+            cstmt.execute();
+
+            try (ResultSet rs = (ResultSet) cstmt.getObject(2)) {
+                if (rs.next()) {
+                    movie = new Movie(
+                            rs.getInt("movie_id"),
+                            rs.getString("movie_name"),
+                            rs.getString("movie_poster_img"),
+                            rs.getString("movie_genre"),
+                            rs.getDate("movie_release_date"),
+                            rs.getInt("movie_running_time")
+                    );
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Database driver not found", e);
+            throw new SQLException(e);
+        }
+        return movie;
+    }
 }
