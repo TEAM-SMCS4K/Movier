@@ -57,11 +57,22 @@ public class SympathyDAO {
 
             int sympathyResult = cstmt.getInt(3);
             result = (sympathyResult == 1);
-        } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.error("Failed to check sympathy existence.", e);
+        } catch (SQLException e) {
+            int errorCode = e.getErrorCode();
+
+            if (errorCode == 20003) {
+                LOGGER.error("Invalid member_id: " + memberId, e);
+            } else if (errorCode == 20004) {
+                LOGGER.error("Invalid review_id: " + reviewId, e);
+            } else {
+                LOGGER.error("Failed to check sympathy existence.", e);
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Failed to check sympathy existence. Class not found.", e);
         }
         return result;
     }
+
 
     public boolean addSympathy(int memberId, int reviewId) {
         String sql = "INSERT INTO sympathy (p_member_id, p_review_id) VALUES (?, ?)";
