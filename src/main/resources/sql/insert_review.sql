@@ -1,24 +1,33 @@
 CREATE OR REPLACE PROCEDURE insert_review(
-    p_member_id IN NUMBER,
-    p_movie_id IN NUMBER,
+    p_reviewer_id IN NUMBER,
+    P_movie_id IN NUMBER,
     p_review_rating IN NUMBER,
     p_review_content IN VARCHAR2,
     p_review_created_at IN DATE,
     p_review_id OUT NUMBER
 ) AS
-    -- NOT NULL 제약 조건 위반에 대한 사용자 정의 예외
-    ex_not_null_violation EXCEPTION;
-    PRAGMA EXCEPTION_INIT(ex_not_null_violation, -1400);
+    rating_null_error EXCEPTION;
+    content_null_error EXCEPTION;
+    PRAGMA EXCEPTION_INIT(rating_null_error, -20001);
+    PRAGMA EXCEPTION_INIT(content_null_error, -20003);
 BEGIN
-    INSERT INTO reviews (MEMBER_ID, MOVIE_ID, REVIEW_RATING, REVIEW_CONTENT, REVIEW_CREATED_AT)
-    VALUES (p_member_id, p_movie_id, p_review_rating, p_review_content, p_review_created_at)
+    IF p_review_rating IS NULL THEN
+        RAISE rating_null_error;
+    END IF;
+
+    IF p_review_content IS NULL OR TRIM(p_review_content) IS NULL THEN
+        RAISE content_null_error;
+    END IF;
+
+    INSERT INTO reviews (REVIEWER_ID, MOVIE_ID, REVIEW_RATING, REVIEW_CONTENT, REVIEW_CREATED_AT)
+    VALUES (p_reviewer_id, P_movie_id, p_review_rating, p_review_content, p_review_created_at)
     RETURNING REVIEW_ID INTO p_review_id;
 EXCEPTION
-    WHEN ex_not_null_violation THEN
-        p_review_id := NULL;
-        RAISE_APPLICATION_ERROR(-20001, '리뷰를 입력해주세요.');
+    WHEN rating_null_error THEN
+        RAISE_APPLICATION_ERROR(-20001, '별점이 입력되지 않았습니다.');
+    WHEN content_null_error THEN
+        RAISE_APPLICATION_ERROR(-20003, '리뷰 내용이 입력되지 않았습니다.');
     WHEN OTHERS THEN
-        p_review_id := NULL;
         RAISE;
 END;
 /

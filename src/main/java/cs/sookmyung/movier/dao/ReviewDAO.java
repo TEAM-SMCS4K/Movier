@@ -22,7 +22,8 @@ public class ReviewDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReviewDAO.class);
 
-    private ReviewDAO() {}
+    private ReviewDAO() {
+    }
 
     public static synchronized ReviewDAO getInstance() {
         if (instance == null) {
@@ -165,7 +166,7 @@ public class ReviewDAO {
         MemberDAO memberDAO = MemberDAO.getInstance();
         String cs;
 
-        if(option.equals("rating")){
+        if (option.equals("rating")) {
             cs = getSortedByRatingPLSQL();
         } else {
             cs = getSortedByLatestPLSQL();
@@ -210,11 +211,11 @@ public class ReviewDAO {
         return "{ call get_latest_reviews_by_movie_id(?, ?, ?) }";
     }
 
-    private String getSortedByRatingPLSQL(){
+    private String getSortedByRatingPLSQL() {
         return "{ call get_rating_reviews_by_movie_id(?, ?, ?) }";
     }
 
-    public int insertReview(Review review) {
+    public int insertReview(Review review) throws SQLException {
         String sql = "{ call insert_review(?, ?, ?, ?, ?, ?) }";
 
         try (Connection conn = getConnection();
@@ -227,16 +228,16 @@ public class ReviewDAO {
             cstmt.registerOutParameter(6, Types.INTEGER);
             cstmt.execute();
             return cstmt.getInt(6);
-        } catch (SQLException e){
-            if (e.getErrorCode() == 20001) {
-                LOGGER.error("Error: 리뷰를 입력해주세요.", e);
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 20001 || e.getErrorCode() == 20003) {
+                LOGGER.error("Database error: " + e.getMessage(), e);
+                throw new SQLException(e.getMessage());
             } else {
-                LOGGER.error("리뷰 등록 중에 오류가 발생했습니다.", e);
+                throw new SQLException("Database error", e);
             }
-            return -1;
         } catch (ClassNotFoundException e) {
             LOGGER.error("Database driver not found", e);
-            return -1;
+            throw new SQLException("Database driver not found", e);
         }
     }
 }
