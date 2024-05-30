@@ -37,17 +37,17 @@ public class SocialLoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("member_id", memberId);
             } catch (IllegalArgumentException ex) {
-                LOGGER.log(Level.WARNING, "Invalid input for social platform ID: " + socialPlatformId, ex);
+                LOGGER.log(Level.WARNING, "Invalid input for social platform ID: " + socialPlatformId);
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "잘못된 입력값입니다.");
             } catch (RuntimeException ex) {
-                LOGGER.log(Level.SEVERE, "Unexpected error occurred while inserting member for social platform ID: " + socialPlatformId, ex);
+                LOGGER.log(Level.SEVERE, "Unexpected error occurred while inserting member for social platform ID");
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "회원 가입에 실패했습니다.");
             }
         } catch (IllegalArgumentException e) {
-            LOGGER.log(Level.WARNING, "Invalid input for social platform ID: " + socialPlatformId, e);
+            LOGGER.log(Level.WARNING, "Invalid input for social platform ID: " + socialPlatformId);
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "잘못된 입력값입니다.");
         } catch (RuntimeException e) {
-            LOGGER.log(Level.SEVERE, "Unexpected error occurred while fetching member ID for social platform ID: " + socialPlatformId, e);
+            LOGGER.log(Level.SEVERE, "Unexpected error occurred while fetching member ID for social platform ID ");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "서버 오류가 발생했습니다.");
         }
     }
