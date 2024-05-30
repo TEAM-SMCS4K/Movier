@@ -10,6 +10,7 @@
 }
 
 .logo {
+    cursor: pointer;
     margin: 0 auto;
     padding-top: 60px;
     padding-bottom: 32px;
@@ -51,19 +52,7 @@
     padding-bottom: 18px;
 }
 
-.movie_list_title {
-    color: #151212;
-    font-weight: 700;
-    font-size: 32px;
-    margin-bottom: 18px;
-    display: block;
-}
 
-.movie_list_grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    padding: 0 300px 300px 0;
-}
 
 
 

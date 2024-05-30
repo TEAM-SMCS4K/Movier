@@ -58,8 +58,10 @@ body{
     align-items: center;
     justify-items: center;
     height: 55px;
-    font-size: 44px;
     font-weight: 700;
+    font-style: normal;
+    font-size: 44px;
+    color: #FFFFFF;
 }
 
 .genre{
@@ -71,6 +73,7 @@ body{
     color: #939393;
     display: flex;
     font-weight: 700;
+    font-style: normal;
     line-height: 22px;
     align-items: center;
     justify-content: center;
@@ -83,6 +86,7 @@ body{
     font-weight: 500;
     margin-top: 10px ;
     font-size: 24px;
+    font-style: normal;
     color: #8B8484;
 }
 
@@ -99,7 +103,7 @@ body{
 
 .score{
     font-size: 36px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .star-rate {

@@ -4,6 +4,20 @@ body {
     padding: 0;
 }
 
+.movie_list_title {
+    color: #151212;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 18px;
+    display: block;
+}
+
+.movie_list_grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 0 300px 300px 0;
+}
+
 .poster {
     width: 177px;
     height: 242px;
@@ -36,3 +50,4 @@ body {
     font-size: 18px;
     font-weight: 400;
 }
+

@@ -12,6 +12,7 @@
     color: #ffffff;
     font-size: 32px;
     font-weight: 500;
+    font-style: normal;
     height: 88px;
     margin-left: 200px;
     line-height: 44px;
@@ -20,25 +21,16 @@
 .review-request p span{
     font-weight: 700;
     font-size: 32px;
+    font-style: normal;
 }
 
-.review-request-button {
+.review-request-button, .login-request-button {
     margin-right: 220px;
     width: 233px;
     height: 74px;
     font-size: 24px;
-    color: #ffffff;
-    background-color: #f16060;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-}
-
-.login-request-button {
-    margin-right: 220px;
-    width: 233px;
-    height: 74px;
-    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
     color: #ffffff;
     background-color: #f16060;
     border: none;

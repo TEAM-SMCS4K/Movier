@@ -1,6 +1,6 @@
 CREATE TABLE SYMPATHY (
-                          p_member_id NUMBER,
-                          p_review_id NUMBER,
-                          CONSTRAINT fk_member FOREIGN KEY (p_member_id) REFERENCES members (member_id),
-                          CONSTRAINT fk_review FOREIGN KEY (p_review_id) REFERENCES reviews (review_id)
+                          p_member_id NUMBER NOT NULL,
+                          p_review_id NUMBER NOT NULL,
+                          CONSTRAINT fk_member FOREIGN KEY (p_member_id) REFERENCES members (member_id) ON DELETE CASCADE,
+                          CONSTRAINT fk_review FOREIGN KEY (p_review_id) REFERENCES reviews (review_id) ON DELETE CASCADE
 );

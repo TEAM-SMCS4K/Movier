@@ -1,20 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="cs.sookmyung.movier.dao.ReviewDAO" %>
+<%@ page import="cs.sookmyung.movier.dao.MovieDAO" %>
 <%@ page import="cs.sookmyung.movier.model.Movie" %>
 <%@ page import="java.sql.SQLException" %>
 
 <%
-    int reviewId = Integer.parseInt(request.getParameter("id"));
-    ReviewDAO reviewDAO = ReviewDAO.getInstance();
+    String movieIdParameter = request.getParameter("movieId");
     Movie movie = null;
 
-    try {
-        movie = reviewDAO.getMovieInfoByReviewId(reviewId);
-        if (movie == null) {
-            throw new SQLException("No movie found for the given review ID.");
+    if (movieIdParameter != null && !movieIdParameter.isEmpty()) {
+        int movieId = Integer.parseInt(movieIdParameter);
+        MovieDAO movieDAO = MovieDAO.getInstance();
+
+        try {
+            movie = movieDAO.getMovieInfoByMovieId(movieId); // getMovieInfoByMovieId 사용
+            if (movie == null) {
+                throw new SQLException("No movie found for the given movie ID.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
 
     request.setAttribute("movie", movie);

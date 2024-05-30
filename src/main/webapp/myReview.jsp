@@ -12,9 +12,9 @@
         redirectToLogin = true;
         alertMessage = "로그인이 필요합니다.";
     } else {
-        String idParameter = request.getParameter("id");
-        if (idParameter != null && !idParameter.isEmpty()) {
-            int reviewId = Integer.parseInt(idParameter);
+        String reviewIdParameter = request.getParameter("reviewId");
+        if (reviewIdParameter != null && !reviewIdParameter.isEmpty()) {
+            int reviewId = Integer.parseInt(reviewIdParameter);
             ReviewDAO reviewDAO = ReviewDAO.getInstance();
             reviewDetail = reviewDAO.getReviewDetailsByMemberId(reviewId, memberId);
 
@@ -93,7 +93,7 @@
     <jsp:include page="/navTabBar.jsp"/>
     <div class="review-card">
         <jsp:include page="/detailsComponent.jsp">
-            <jsp:param name="id" value="<%= reviewDetail.getReviewId() %>"/>
+            <jsp:param name="movieId" value="<%= reviewDetail.getMovieId() %>"/>
         </jsp:include>
         <div class="review-content">
             <h2>나의 별점</h2>
@@ -126,7 +126,7 @@
                 <p><%= reviewDetail.getReviewContent() %></p>
             </div>
             <div class="review-submit">
-                <button class="edit-button" onclick="location.href='editReview.jsp?id=<%= reviewDetail.getReviewId() %>'">수정하기</button>
+                <button class="edit-button" onclick="location.href='editReview.jsp?reviewId=<%= reviewDetail.getReviewId() %>&movieId=<%= reviewDetail.getMovieId() %>'">수정하기</button>
                 <button class="delete-button" onclick="confirmDelete(<%= reviewDetail.getReviewId() %>, <%= memberId %>);">삭제하기</button>
             </div>
         </div>
