@@ -5,6 +5,7 @@ import cs.sookmyung.movier.model.Member;
 
 import java.sql.*;
 
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,15 +34,30 @@ public class MemberDAO {
     public int getMemberIdBySocialPlatformId(String socialPlatformId) {
         String sql = "{? = call get_member_id_by_kakao_platform_id(?)}";
         try (Connection conn = getConnection(); CallableStatement cstmt = conn.prepareCall(sql)) {
-            cstmt.registerOutParameter(1, Types.DECIMAL);
+            cstmt.registerOutParameter(1, Types.NUMERIC);
             cstmt.setString(2, socialPlatformId);
             cstmt.execute();
             return cstmt.getInt(1);
-        } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "소셜 플랫폼 ID로 회원 ID를 가져오는데 실패했습니다.", e);
-            return -1;
+        } catch (SQLException e) {
+            int errorCode = e.getErrorCode();
+
+            if (errorCode == 20001) {
+                LOGGER.log(Level.WARNING, "Member not found for social platform ID: " + socialPlatformId, e);
+                throw new NoSuchElementException("Member not found for social platform ID: " + socialPlatformId);
+            } else if (errorCode == 20002) {
+                LOGGER.log(Level.SEVERE, "Unexpected error occurred while fetching member ID for social platform ID: " + socialPlatformId, e);
+                throw new RuntimeException("Unexpected error occurred while fetching member ID for social platform ID: " + socialPlatformId, e);
+            } else {
+                LOGGER.log(Level.SEVERE, "Failed to fetch member ID by social platform ID. SQLState: " + e.getSQLState() + ", ErrorCode: " + errorCode, e);
+                throw new RuntimeException("Failed to fetch member ID by social platform ID.", e);
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Failed to fetch member ID by social platform ID. Class not found.", e);
+            throw new RuntimeException("Failed to fetch member ID by social platform ID.", e);
         }
     }
+
+
 
     public int insertMember(Member member) {
         String sql = "{call insert_member(?, ?, ?, ?)}";
@@ -49,14 +65,33 @@ public class MemberDAO {
             cstmt.setString(1, member.getNickname());
             cstmt.setString(2, member.getSocialPlatformId());
             cstmt.setString(3, member.getProfileImg());
-            cstmt.registerOutParameter(4, Types.DECIMAL);
+            cstmt.registerOutParameter(4, Types.NUMERIC);
+
             cstmt.execute();
             return cstmt.getInt(4);
-        } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "회원 추가 중에 오류가 발생했습니다.", e);
-            return -1;
+        } catch (SQLException e) {
+            int errorCode = e.getErrorCode();
+
+            if (errorCode == 20002) {
+                LOGGER.log(Level.WARNING, "Invalid member_name: " + member.getNickname(), e);
+                throw new IllegalArgumentException("Invalid member_name: " + member.getNickname());
+            } else if (errorCode == 20003) {
+                LOGGER.log(Level.WARNING, "Invalid kakao_platform_id: " + member.getSocialPlatformId(), e);
+                throw new IllegalArgumentException("Invalid kakao_platform_id: " + member.getSocialPlatformId());
+            } else if (errorCode == 20001) {
+                LOGGER.log(Level.SEVERE, "Error inserting member.", e);
+                throw new RuntimeException("Error inserting member.", e);
+            } else {
+                LOGGER.log(Level.SEVERE, "Unexpected error during member insertion. SQLState: " + e.getSQLState() + ", ErrorCode: " + errorCode, e);
+                throw new RuntimeException("Error inserting member.", e);
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Failed to insert member. Class not found.", e);
+            throw new RuntimeException("Failed to insert member.", e);
         }
     }
+
+
 
     public Member getMemberById(int memberId) {
         String sql = "SELECT * FROM members WHERE member_id = ?";
