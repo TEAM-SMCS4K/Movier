@@ -9,7 +9,7 @@ CREATE OR REPLACE PROCEDURE insert_review(
     rating_null_error EXCEPTION;
     content_null_error EXCEPTION;
 BEGIN
-    IF p_review_rating IS NULL THEN
+    IF p_review_rating IS NULL OR p_review_rating = 0 THEN
         RAISE rating_null_error;
     END IF;
 
