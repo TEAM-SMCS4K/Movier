@@ -19,25 +19,6 @@ body {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.movier-logo{
-    height: 44px;
-    margin-left: 200px;
-}
-
-.profile{
-    display: flex;
-    align-items: center;
-    width: 221px;
-    height: 28px;
-    margin-right: 200px;
-}
-
-.profile_img{
-    margin-right: 10px;
-    width: 28px;
-    height: 28px;
-}
-
 .nickname{
     color: #ffffff;
 }
