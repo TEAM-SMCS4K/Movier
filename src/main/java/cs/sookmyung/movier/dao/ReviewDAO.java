@@ -184,8 +184,7 @@ public class ReviewDAO {
     public int insertReview(Review review) throws SQLException {
         String sql = "{ call insert_review(?, ?, ?, ?, ?, ?) }";
 
-        try (Connection conn = getConnection();
-             CallableStatement cstmt = conn.prepareCall(sql)) {
+        try (Connection conn = getConnection(); CallableStatement cstmt = conn.prepareCall(sql)) {
             cstmt.setInt(1, review.getMemberId());
             cstmt.setInt(2, review.getMovieId());
             cstmt.setDouble(3, review.getReviewRating());
@@ -195,10 +194,16 @@ public class ReviewDAO {
             cstmt.execute();
             return cstmt.getInt(6);
         } catch (SQLException e) {
-            if (e.getErrorCode() == 20001 || e.getErrorCode() == 20003) {
-                LOGGER.error("Database error: " + e.getMessage(), e);
-                throw new SQLException(e.getMessage());
-            } else {
+            int errorCode = e.getErrorCode();
+            if(errorCode == 20001) {
+                LOGGER.error("별점이 입력되지 않았습니다.");
+                throw new SQLException("별점이 입력되지 않았습니다.");
+            }
+            else if(errorCode==20003){
+                LOGGER.error("리뷰 내용이 입력되지 않았습니다.");
+                throw new SQLException("리뷰 내용이 입력되지 않았습니다.");
+            }
+            else {
                 throw new SQLException("Database error", e);
             }
         } catch (ClassNotFoundException e) {
