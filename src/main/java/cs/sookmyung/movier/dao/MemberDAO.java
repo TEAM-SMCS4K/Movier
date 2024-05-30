@@ -42,18 +42,18 @@ public class MemberDAO {
             int errorCode = e.getErrorCode();
 
             if (errorCode == 20001) {
-                LOGGER.log(Level.WARNING, "Member not found for social platform ID: " + socialPlatformId, e);
+                LOGGER.log(Level.WARNING, "Member not found for social platform ID: " + socialPlatformId);
                 throw new NoSuchElementException("Member not found for social platform ID: " + socialPlatformId);
             } else if (errorCode == 20002) {
-                LOGGER.log(Level.SEVERE, "Unexpected error occurred while fetching member ID for social platform ID: " + socialPlatformId, e);
-                throw new RuntimeException("Unexpected error occurred while fetching member ID for social platform ID: " + socialPlatformId, e);
+                LOGGER.log(Level.SEVERE, "Unexpected error occurred while fetching member ID for social platform ID: " + socialPlatformId);
+                throw new RuntimeException("Unexpected error occurred while fetching member ID for social platform ID: " + socialPlatformId);
             } else {
-                LOGGER.log(Level.SEVERE, "Failed to fetch member ID by social platform ID. SQLState: " + e.getSQLState() + ", ErrorCode: " + errorCode, e);
-                throw new RuntimeException("Failed to fetch member ID by social platform ID.", e);
+                LOGGER.log(Level.SEVERE, "Failed to fetch member ID by social platform ID. ErrorCode: " + errorCode);
+                throw new RuntimeException("Failed to fetch member ID by social platform ID.");
             }
         } catch (ClassNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "Failed to fetch member ID by social platform ID. Class not found.", e);
-            throw new RuntimeException("Failed to fetch member ID by social platform ID.", e);
+            LOGGER.log(Level.SEVERE, "Failed to fetch member ID by social platform ID. Class not found.");
+            throw new RuntimeException("Failed to fetch member ID by social platform ID.");
         }
     }
 
