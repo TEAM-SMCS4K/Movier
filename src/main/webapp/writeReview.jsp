@@ -50,7 +50,7 @@
 <div class="background-container" style="background: url(<%=movie.getThumbnailImg() %>)no-repeat center /cover">
     <jsp:include page="/navTabBar.jsp"/>
     <div class="review-card">
-        <%--        <jsp:include page="/detailsComponent.jsp" />--%>
+        <jsp:include page="/detailsComponent.jsp" />
         <div class="review-content">
             <form id="reviewForm">
                 <input type="hidden" id="memberId" name="memberId" value="<%=memberId%>">
@@ -70,13 +70,19 @@
             </form>
             <script>
                 $(document).ready(function(){
+                    var starRating = 0;
+
+                    $('.rating .rating__input').click(function(){
+                        starRating = $(this).val();
+                    });
+
                     $("#reviewForm").submit(function(event){
                         event.preventDefault(); // 폼 제출 막기
                         console.log('Submit button clicked');
                         const formData = {
                             memberId: $("#memberId").val(),
                             movieId: $("#movieId").val(),
-                            starRating: $("input[name='starRating']:checked").val(),
+                            starRating: starRating,
                             reviewContent: $("#reviewContent").val()
                         };
                         console.log('Data:', formData);
