@@ -4,6 +4,7 @@ import cs.sookmyung.movier.model.Movie;
 import cs.sookmyung.movier.model.MovieReview;
 import cs.sookmyung.movier.model.MyPageReview;
 import cs.sookmyung.movier.model.ReviewDetail;
+import cs.sookmyung.movier.model.Review;
 import cs.sookmyung.movier.config.ConfigLoader;
 
 import java.sql.*;
@@ -21,7 +22,8 @@ public class ReviewDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReviewDAO.class);
 
-    private ReviewDAO() {}
+    private ReviewDAO() {
+    }
 
     public static synchronized ReviewDAO getInstance() {
         if (instance == null) {
@@ -130,7 +132,7 @@ public class ReviewDAO {
         MemberDAO memberDAO = MemberDAO.getInstance();
         String cs;
 
-        if(option.equals("rating")){
+        if (option.equals("rating")) {
             cs = getSortedByRatingPLSQL();
         } else {
             cs = getSortedByLatestPLSQL();
@@ -175,7 +177,38 @@ public class ReviewDAO {
         return "{ call get_latest_reviews_by_movie_id(?, ?, ?) }";
     }
 
-    private String getSortedByRatingPLSQL(){
+    private String getSortedByRatingPLSQL() {
         return "{ call get_rating_reviews_by_movie_id(?, ?, ?) }";
+    }
+
+    public int insertReview(Review review) throws SQLException {
+        String sql = "{ call insert_review(?, ?, ?, ?, ?, ?) }";
+
+        try (Connection conn = getConnection(); CallableStatement cstmt = conn.prepareCall(sql)) {
+            cstmt.setInt(1, review.getMemberId());
+            cstmt.setInt(2, review.getMovieId());
+            cstmt.setDouble(3, review.getReviewRating());
+            cstmt.setString(4, review.getReviewContent());
+            cstmt.setDate(5, new java.sql.Date(review.getReviewCreatedAt().getTime()));
+            cstmt.registerOutParameter(6, Types.INTEGER);
+            cstmt.execute();
+            return cstmt.getInt(6);
+        } catch (SQLException e) {
+            int errorCode = e.getErrorCode();
+            if(errorCode == 20001) {
+                LOGGER.error("별점이 입력되지 않았습니다.");
+                throw new SQLException("별점이 입력되지 않았습니다.");
+            }
+            else if(errorCode==20003){
+                LOGGER.error("리뷰 내용이 입력되지 않았습니다.");
+                throw new SQLException("리뷰 내용이 입력되지 않았습니다.");
+            }
+            else {
+                throw new SQLException("Database error", e);
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Database driver not found", e);
+            throw new SQLException("Database driver not found", e);
+        }
     }
 }
