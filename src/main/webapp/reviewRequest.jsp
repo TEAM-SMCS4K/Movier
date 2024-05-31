@@ -18,6 +18,8 @@
     boolean isLoggedIn = memberId != null;
     String message = "리뷰를 작성하기 위해 로그인을 해주세요!";
     String buttonText = "로그인하기";
+    String movieTitle = request.getParameter("movieTitle");
+
     if(isLoggedIn){
         String userName = MemberDAO.getInstance().getMemberNameById(memberId);
         message = userName + "님의 의견도 알려주세요!";
@@ -25,7 +27,7 @@
     }
 %>
 <div class="review-request">
-    <p><span>범죄도시 4</span> 재미있게 보셨나요?<br> <%= message %></p>
+    <p><span><%=movieTitle%></span> 재미있게 보셨나요?<br> <%= message %></p>
     <button class="<%= isLoggedIn ? "review-request-button" : "login-request-button" %>" onclick="handleButtonClick()"><%= buttonText %></button>
 </div>
 <script type="text/javascript">
