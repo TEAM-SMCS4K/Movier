@@ -34,6 +34,7 @@
     }
 
     double startRatingWidth = (movieReviewInfo.getRatingAverage() / 5) * 100;
+    request.setCharacterEncoding("UTF-8");
 %>
 <div class="background-container" style="background: url(<%=movie.getThumbnailImg()%>)no-repeat center /cover">
     <jsp:include page="/navTabBar.jsp" />
@@ -60,7 +61,7 @@
             <%=movie.getPlot()%>
         </div>
         <jsp:include page="/reviewRequest.jsp">
-            <jsp:param name="movieId" value="<%=movieId%>" />
+            <jsp:param name="movieTitle" value="<%=movie.getTitle()%>" />
         </jsp:include>
         <jsp:include page="/reviewList.jsp"/>
     </div>
