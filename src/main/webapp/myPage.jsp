@@ -71,14 +71,17 @@
             } else {
                 for (MyPageReview myPageReview : myPageReviews) {
                     String truncatedReviewContent = myPageReview.getReviewContent().length() > 100
-                            ? myPageReview.getReviewContent().substring(0, 100) + "･･･"
+                            ? myPageReview.getReviewContent().substring(0, 100) + "…"
                             : myPageReview.getReviewContent();
+                    String truncatedTitle = myPageReview.getTitle().length() > 7
+                            ? myPageReview.getTitle().substring(0, 7) + "…"
+                            : myPageReview.getTitle();
             %>
             <div class="review" onclick="location.href='myReview.jsp?reviewId=<%= myPageReview.getReviewId() %>'">
                 <img src="<%= myPageReview.getPosterImg() != null ? myPageReview.getPosterImg() : "img/movie_poster_dummy.svg" %>" alt="Movie Poster" class="review-poster">
                 <div class="review-details">
                     <div class="title-rating">
-                        <h3><%= myPageReview.getTitle() %></h3>
+                        <h3><%= truncatedTitle %></h3>
                         <span> <img src="img/icn_star_full.svg" alt="Rating Star" class="rating-star"></span>
                         <span class="rating"><%= myPageReview.getReviewRating() %> / 5</span>
                     </div>
