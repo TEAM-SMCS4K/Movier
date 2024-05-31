@@ -8,7 +8,8 @@ BEGIN
             m.movie_id AS id,
             m.movie_name AS title,
             m.movie_poster_img AS posterImg,
-            NVL(AVG(r.review_rating), 0) AS rating
+            NVL(AVG(r.review_rating), 0) AS rating,
+            NVL(COUNT(r.review_id), 0) AS review_count
         FROM
             movies m
                 LEFT JOIN

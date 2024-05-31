@@ -74,7 +74,7 @@ header {
     font-size: 32px;
     font-weight: 500;
     line-height: 38px;
-    padding-left: 160px;
+    padding-left: 175px;
 }
 
 .review-list {
@@ -95,10 +95,11 @@ header {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    width: 100%; /* 변경된 부분 */
-    max-width: 600px; /* 변경된 부분 */
+    width: 100%;
+    max-width: 600px;
     gap: 28px;
     cursor: pointer;
+    margin-left: 40px;
 }
 
 .review-poster {
