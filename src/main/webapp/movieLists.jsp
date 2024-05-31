@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kwonjeong
-  Date: 5/20/24
-  Time: 5:07 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="cs.sookmyung.movier.model.MovieList" %>
@@ -20,7 +13,7 @@
 <span class="movie_list_title">무비차트</span>
 <div class="movie_list_grid">
     <% for (MovieList movie : movieList) { %>
-    <div class="cell">
+    <div class="cell" data-movie-id="<%= movie.getId() %>" style="cursor:pointer;">
         <img src="<%= movie.getPosterImg() %>" alt="poster" class="poster">
         <span class="movie_title"><%= movie.getTitle() %></span>
         <div class="ratingBox">
@@ -30,6 +23,17 @@
     </div>
     <% } %>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const movieCells = document.querySelectorAll(".cell");
+
+        movieCells.forEach(cell => {
+            cell.addEventListener("click", function() {
+                const movieId = this.getAttribute("data-movie-id");
+                window.location.href = "movieDetail.jsp?movieId=" + movieId;
+            });
+        });
+    });
+</script>
 </body>
 </html>
-
