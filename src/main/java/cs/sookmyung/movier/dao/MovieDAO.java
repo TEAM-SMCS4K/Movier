@@ -99,7 +99,8 @@ public class MovieDAO {
                             resultSet.getInt("id"),
                             resultSet.getString("title"),
                             resultSet.getString("posterImg"),
-                            resultSet.getDouble("rating")
+                            resultSet.getDouble("rating"),
+                            resultSet.getInt("review_count")
                     );
                     movieList.add(movie);
                 }
@@ -127,7 +128,8 @@ public class MovieDAO {
                             resultSet.getInt("id"),
                             resultSet.getString("title"),
                             resultSet.getString("posterImg"),
-                            resultSet.getDouble("rating")
+                            resultSet.getDouble("rating"),
+                            resultSet.getInt("review_count")
                     );
                     movieList.add(movie);
                 }

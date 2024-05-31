@@ -25,7 +25,7 @@
         <span class="movie_title"><%= movie.getTitle() %></span>
         <div class="ratingBox">
             <img src="img/icn_star_full.svg" alt="rating" class="rating_icon">
-            <span class="movie_rating"><%= movie.getRating() %></span>
+            <span class="movie_rating"><%= movie.getRating() %> (<%= movie.getReview_count() %>)</span>
         </div>
     </div>
     <% } %>
