@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cs.sookmyung.movier.dao.MovieDAO" %>
 <%@ page import="cs.sookmyung.movier.model.Movie" %>
-<%@ page import="cs.sookmyung.movier.model.MovieReviewInfo" %>
 
 <html>
 <head>
@@ -21,9 +20,8 @@
     int movieId = Integer.parseInt(request.getParameter("movieId"));
     MovieDAO movieDao = MovieDAO.getInstance();
     Movie movie = movieDao.getMovieById(movieId);
-    MovieReviewInfo movieReviewInfo = movieDao.getMovieReviewInfoById(movieId);
 
-    if(movie == null || movieReviewInfo == null){
+    if(movie == null){
 %>
 <script type="text/javascript">
     alert("잘못된 접근입니다");
@@ -33,7 +31,7 @@
         return;
     }
 
-    double startRatingWidth = (movieReviewInfo.getRatingAverage() / 5) * 100;
+    double startRatingWidth = (movie.getRatingAverage() / 5) * 100;
     request.setCharacterEncoding("UTF-8");
 %>
 <div class="background-container" style="background: url(<%=movie.getThumbnailImg()%>)no-repeat center /cover">
@@ -48,11 +46,11 @@
             </div>
             <div class="release-date"><%=movie.getReleaseDateAndRunningTime()%></div>
             <div class="rating">
-                <div class="score"><p><%=movieReviewInfo.getRatingAverage()%></p></div>
+                <div class="score"><p><%=movie.getRatingAverage()%></p></div>
                 <div class="star-rate">
                     <span style="width: <%=startRatingWidth%>%"></span>
                 </div>
-                <div class="review-count"><p><%=movieReviewInfo.getReviewCount()%></p></div>
+                <div class="review-count"><p><%=movie.getReviewCount()%></p></div>
             </div>
         </div>
     </div>
