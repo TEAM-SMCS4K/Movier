@@ -14,22 +14,14 @@
     <div class="profile" id="profile">
         <%
             Integer memberId = (Integer) session.getAttribute("member_id");
-            boolean isLoggedIn = false;
-            Member member = null;
-
-            if (memberId != null) {
-                MemberDAO memberDao = MemberDAO.getInstance();
-                member = memberDao.getMemberById(memberId);
-                if (member != null) {
-                    isLoggedIn = true;
-                    request.setAttribute("member", member);
-                }
-            }
+            String nickname = (String) session.getAttribute("nickname");
+            String profileImg = (String) session.getAttribute("profile_img");
+            boolean isLoggedIn = memberId != null;
 
             if (isLoggedIn) {
         %>
-        <img src="<%= member.getProfileImg() != null ? member.getProfileImg() : "img/default_profile_img.svg" %>" class="profile_img" alt="Profile Picture">
-        <p class="nickname"><%= member.getNickname() %> 님</p>
+        <img src="<%= profileImg != null ? profileImg : "img/default_profile_img.svg" %>" class="profile_img" alt="Profile Picture">
+        <p class="nickname"><%= nickname %> 님</p>
         <%
         } else {
         %>
@@ -98,12 +90,7 @@
     }
 
     function logout() {
-        alert("로그아웃합니다.");
-        <%
-         // 세션 무효화
-        session.invalidate();
-        %>
-        window.location.href = "movieMain.jsp"; // 메인 페이지
+        window.location.href = "logout"; // 로그아웃 서블릿으로 이동
     }
 
     function login() {
