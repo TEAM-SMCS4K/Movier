@@ -42,12 +42,14 @@ body {
 }
 
 .input-box {
-    font-family: 'SUIT', sans-serif;
+    font-family: 'SUIT';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
     margin-top: 21px;
-    font-size: 15px;
     border: none;
     outline: none;
-    width: 80%;
+    width: 90%;
     resize: none;
 }
 
@@ -71,4 +73,8 @@ body {
     color: #ffffff;
     margin-left: 41px;
     font-family: 'SUIT', sans-serif;
+    transition: background-color 0.3s ease;
+}
+.submit-button:hover {
+    background: #D14F4F;
 }
