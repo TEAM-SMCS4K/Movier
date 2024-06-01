@@ -61,7 +61,7 @@
                 </div>
                 <div class="review-input">
                     <label>
-                        <textarea name='reviewContent' id ="reviewContent" cols="25" rows="20" class="input-box" placeholder="<%=placeholderText%>"></textarea>
+                        <textarea name='reviewContent' id ="reviewContent" rows="14" class="input-box" placeholder="<%=placeholderText%>"></textarea>
                     </label>
                 </div>
                 <div class="review-submit">
