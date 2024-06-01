@@ -50,8 +50,8 @@ public class MovieDAO {
                             resultSet.getDate("movie_release_date"),
                             resultSet.getInt("movie_running_time"),
                             resultSet.getString("movie_plot"),
-                            resultSet.getDouble("ratingAverage"),
-                            resultSet.getInt("reviewCount")
+                            resultSet.getDouble("movie_review_average_rating"),
+                            resultSet.getInt("movie_review_count")
                     );
                 }
             }
