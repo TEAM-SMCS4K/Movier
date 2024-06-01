@@ -204,6 +204,7 @@ public class ReviewDAO {
                 throw new SQLException("리뷰 내용이 입력되지 않았습니다.");
             }
             else {
+                LOGGER.error("Database error");
                 throw new SQLException("Database error", e);
             }
         } catch (ClassNotFoundException e) {
