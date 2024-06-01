@@ -6,5 +6,7 @@ CREATE TABLE movies (
                         movie_running_time VARCHAR2(8) NOT NULL,
                         movie_poster_img VARCHAR2(255) NOT NULL,
                         movie_thumbnail_img VARCHAR2(255) NOT NULL,
-                        movie_plot VARCHAR2(1000) NOT NULL
+                        movie_plot VARCHAR2(1000) NOT NULL,
+                        movie_review_count NUMBER DEFAULT 0 NOT NULL,
+                        movie_review_average_rating NUMBER(2,1) DEFAULT 0 NOT NULL
 );
