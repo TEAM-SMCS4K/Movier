@@ -72,12 +72,6 @@
                 <h2>나의 별점</h2>
                 <div class="rating">
                     <jsp:include page="/starRating.jsp"/>
-                    <script>
-                        $(document).ready(function(){
-                            var starRating = <%=review.getReviewRating()%>;
-                            $('.rating .rating__input[value="' + starRating + '"]').prop('checked', true);
-                        });
-                    </script>
                 </div>
                 <div class="review-input">
                     <label>
@@ -91,6 +85,30 @@
             <script>
                 $(document).ready(function(){
                     var starRating = <%=review.getReviewRating()%>;
+                    let stars = document.querySelectorAll('.rating .star-icon');
+
+                    if (starRating) {
+                        document.getElementById('rating-number').textContent = starRating;
+                        filledRate(starRating*2, stars.length);
+                        clickRadioButtons(starRating);
+                    }
+
+                    function filledRate(index, length) {
+                        if (index <= length) {
+                            for (let i = 0; i < index; i++) {
+                                stars[i].classList.add('filled');
+                            }
+                        }
+                    }
+
+                    function clickRadioButtons(starRating) {
+                        var radioValue = String(starRating);
+                        var radioButton = document.querySelector('.rating__input[value="' + radioValue + '"]');
+
+                        if (radioButton) {
+                            radioButton.checked = true;
+                        }
+                    }
 
                     $('.rating .rating__input').click(function(){
                         starRating = $(this).val();
