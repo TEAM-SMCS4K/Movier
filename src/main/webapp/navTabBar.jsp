@@ -14,14 +14,22 @@
     <div class="profile" id="profile">
         <%
             Integer memberId = (Integer) session.getAttribute("member_id");
-            String nickname = (String) session.getAttribute("nickname");
-            String profileImg = (String) session.getAttribute("profile_img");
-            boolean isLoggedIn = memberId != null;
+            boolean isLoggedIn = false;
+            Member member = null;
+
+            if (memberId != null) {
+                MemberDAO memberDao = MemberDAO.getInstance();
+                member = memberDao.getMemberById(memberId);
+                if (member != null) {
+                    isLoggedIn = true;
+                    request.setAttribute("member", member);
+                }
+            }
 
             if (isLoggedIn) {
         %>
-        <img src="<%= profileImg != null ? profileImg : "img/default_profile_img.svg" %>" class="profile_img" alt="Profile Picture">
-        <p class="nickname"><%= nickname %> 님</p>
+        <img src="<%= member.getProfileImg() != null ? member.getProfileImg() : "img/default_profile_img.svg" %>" class="profile_img" alt="Profile Picture">
+        <p class="nickname"><%= member.getNickname() %> 님</p>
         <%
         } else {
         %>
@@ -90,7 +98,8 @@
     }
 
     function logout() {
-        window.location.href = "logout"; // 로그아웃 서블릿으로 이동
+        alert("로그아웃합니다.");
+        window.location.href="logout";
     }
 
     function login() {
