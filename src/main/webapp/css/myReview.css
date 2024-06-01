@@ -39,7 +39,6 @@ body {
     flex-direction: row;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 19px;
 }
 
 .half-star-container {
@@ -91,6 +90,12 @@ body {
     height: 45px;
     color: #ffffff;
     margin-left: 10px;
+    font-family: 'SUIT', sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background: #D14F4F;
 }
 
 .delete-button {
@@ -102,4 +107,10 @@ body {
     height: 45px;
     color: #ffffff;
     margin-left: 10px;
+    font-family: 'SUIT', sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background: #000000;
 }
