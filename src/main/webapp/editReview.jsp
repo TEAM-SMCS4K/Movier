@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nache
-  Date: 24. 5. 22.
-  Time: 오후 7:17
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cs.sookmyung.movier.dao.MemberDAO" %>
 <%@ page import="cs.sookmyung.movier.model.Member" %>
@@ -15,9 +8,9 @@
 <%
     Integer memberId = (Integer) session.getAttribute("member_id");
     int reviewId = Integer.parseInt(request.getParameter("reviewId"));
-    int movieId = Integer.parseInt(request.getParameter("movieId"));
     boolean redirectToLogin = false;
     String alertMessage = "";
+    int movieId = -1;
 
     if (memberId == null) {
         redirectToLogin = true;
@@ -29,13 +22,19 @@
             redirectToLogin = true;
             alertMessage = "잘못된 접근입니다";
         } else {
-            MovieDAO movieDao = MovieDAO.getInstance();
-            Movie movie = movieDao.getMovieById(movieId);
             ReviewDAO reviewDao = ReviewDAO.getInstance();
             Review review = reviewDao.getReviewById(reviewId);
-            request.setAttribute("member", member);
-            request.setAttribute("movie", movie);
-            request.setAttribute("review", review);
+            if (review == null) {
+                redirectToLogin = true;
+                alertMessage = "리뷰를 찾을 수 없습니다";
+            } else {
+                movieId = review.getMovieId();
+                MovieDAO movieDao = MovieDAO.getInstance();
+                Movie movie = movieDao.getMovieById(movieId);
+                request.setAttribute("member", member);
+                request.setAttribute("movie", movie);
+                request.setAttribute("review", review);
+            }
         }
     }
 %>
@@ -62,7 +61,9 @@
 <div class="background-container" style="background: url(<%=movie.getThumbnailImg() %>)no-repeat center /cover">
     <jsp:include page="/navTabBar.jsp"/>
     <div class="review-card">
-        <jsp:include page="/detailsComponent.jsp" />
+        <jsp:include page="/detailsComponent.jsp">
+            <jsp:param name="movieId" value="<%= movieId %>" />
+        </jsp:include>
         <div class="review-content">
             <form id="editForm">
                 <input type="hidden" id="reviewId" name="reviewId" value="<%=reviewId%>">
@@ -114,7 +115,7 @@
                             success: function(response){
                                 console.log('AJAX 요청 성공');
                                 alert("리뷰가 수정되었습니다.");
-                                window.location.href = 'myReview.jsp';
+                                window.location.href = 'myReview.jsp?reviewId=' + $("#reviewId").val();
                             },
                             error: function(xhr){
                                 const errorMessage = JSON.parse(xhr.responseText).message;
