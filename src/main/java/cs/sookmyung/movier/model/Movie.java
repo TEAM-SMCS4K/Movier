@@ -25,6 +25,7 @@ public class Movie {
         this.runningTime = runningTime;
         this.plot = plot;
         this.ratingAverage = ratingAverage;
+        this.reviewCount = reviewCount;
     }
 
     public Movie(int id, String title, String posterImg, String genre, Date releaseDate, int runningTime) {
