@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cs.sookmyung.movier.dao.ReviewDAO" %>
+<%@ page import="cs.sookmyung.movier.dao.MemberDAO" %>
 <%@ page import="cs.sookmyung.movier.model.ReviewDetail" %>
-
 <%
     Integer memberId = (Integer) session.getAttribute("member_id");
     boolean redirectToLogin = false;
@@ -97,30 +97,33 @@
         </jsp:include>
         <div class="review-content">
             <h2>나의 별점</h2>
-            <div class="star-container">
-                <%
-                    double rating = reviewDetail.getReviewRating();
-                    int fullStars = (int) rating;
-                    boolean halfStar = (rating - fullStars) >= 0.5;
-                    for (int i = 1; i <= fullStars; i++) {
-                %>
-                <img src="<%= request.getContextPath() %>/img/icn_star_full.svg" alt="Full Star">
-                <%
-                    }
-                    if (halfStar) {
-                %>
-                <div class="half-star-container">
-                    <img src="<%= request.getContextPath() %>/img/icn_star_full.svg" class="half-star" alt="Half Star">
-                    <img src="<%= request.getContextPath() %>/img/icn_star_empty.svg" class="half-star-bg" alt="Empty Half Star">
+            <div class="rating-container">
+                <div class="rating-number" id="rating-number"><%= reviewDetail.getReviewRating() %></div>
+                <div class="star-container">
+                    <%
+                        double rating = reviewDetail.getReviewRating();
+                        int fullStars = (int) rating;
+                        boolean halfStar = (rating - fullStars) >= 0.5;
+                        for (int i = 1; i <= fullStars; i++) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/img/icn_star_full.svg" alt="Full Star">
+                    <%
+                        }
+                        if (halfStar) {
+                    %>
+                    <div class="half-star-container">
+                        <img src="<%= request.getContextPath() %>/img/icn_star_full.svg" class="half-star" alt="Half Star">
+                        <img src="<%= request.getContextPath() %>/img/icn_star_empty.svg" class="half-star-bg" alt="Empty Half Star">
+                    </div>
+                    <%
+                        }
+                        for (int i = fullStars + (halfStar ? 1 : 0); i < 5; i++) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/img/icn_star_empty.svg" alt="Empty Star">
+                    <%
+                        }
+                    %>
                 </div>
-                <%
-                    }
-                    for (int i = fullStars + (halfStar ? 1 : 0); i < 5; i++) {
-                %>
-                <img src="<%= request.getContextPath() %>/img/icn_star_empty.svg" alt="Empty Star">
-                <%
-                    }
-                %>
             </div>
             <div class="review-text">
                 <p><%= reviewDetail.getReviewContent() %></p>
