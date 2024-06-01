@@ -22,7 +22,7 @@
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--full" for="star1">
-            <input type="radio" id="star1" class="rating__input" name="starRating" value="1">
+            <input type="radio" id="star1" class="rating__input" name="starRating" value="1.0">
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--half" for="star1half">
@@ -30,7 +30,7 @@
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--full" for="star2">
-            <input type="radio" id="star2" class="rating__input" name="starRating" value="2">
+            <input type="radio" id="star2" class="rating__input" name="starRating" value="2.0">
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--half" for="star2half">
@@ -38,7 +38,7 @@
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--full" for="star3">
-            <input type="radio" id="star3" class="rating__input" name="starRating" value="3">
+            <input type="radio" id="star3" class="rating__input" name="starRating" value="3.0">
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--half" for="star3half">
@@ -46,7 +46,7 @@
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--full" for="star4">
-            <input type="radio" id="star4" class="rating__input" name="starRating" value="4">
+            <input type="radio" id="star4" class="rating__input" name="starRating" value="4.0">
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--half" for="star4half">
@@ -54,7 +54,7 @@
             <span class="star-icon"></span>
         </label>
         <label class="rating__label rating__label--full" for="star5">
-            <input type="radio" id="star5" class="rating__input" name="starRating" value="5">
+            <input type="radio" id="star5" class="rating__input" name="starRating" value="5.0">
             <span class="star-icon"></span>
         </label>
     </div>
