@@ -61,7 +61,7 @@
 <body>
 <div class="container">
     <img src="img/movier_logo.svg" alt="Movier Logo" class="movier-logo">
-    <p>영화의 마음을 함께하는 공간</p>
+    <p>영화와 마음을 함께하는 공간</p>
     <a href="javascript:kakaoLogin();" class="kakao-login-btn">
         <img src="img/kakao_logo.svg" alt="카카오톡으로 로그인" class="kakao-logo"> 카카오톡으로 로그인
     </a>
