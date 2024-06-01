@@ -2,7 +2,6 @@ package cs.sookmyung.movier.dao;
 
 import cs.sookmyung.movier.config.ConfigLoader;
 import cs.sookmyung.movier.model.Movie;
-import cs.sookmyung.movier.model.MovieReviewInfo;
 import cs.sookmyung.movier.model.MovieList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,35 +49,14 @@ public class MovieDAO {
                             resultSet.getString("movie_genre"),
                             resultSet.getDate("movie_release_date"),
                             resultSet.getInt("movie_running_time"),
-                            resultSet.getString("movie_plot")
+                            resultSet.getString("movie_plot"),
+                            resultSet.getDouble("movie_review_average_rating"),
+                            resultSet.getInt("movie_review_count")
                     );
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {
             LOGGER.error("영화 상세 정보를 가져오는데 실패했습니다.", e);
-        }
-        return null;
-    }
-
-    public MovieReviewInfo getMovieReviewInfoById(int movieId) {
-        String sql = "SELECT m.movie_id, COUNT(r.review_id) AS reviewCount, AVG(r.review_rating) AS ratingAverage"
-                + " FROM movies m LEFT JOIN reviews r ON m.movie_id = r.movie_id"
-                + " WHERE m.movie_id = ?"
-                + " GROUP BY m.movie_id";
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, movieId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return new MovieReviewInfo(
-                            resultSet.getDouble("ratingAverage"),
-                            resultSet.getInt("reviewCount")
-                    );
-                }
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            LOGGER.error("리뷰와 관련된 영화 정보를 가져오는데 실패했습니다.", e);
         }
         return null;
     }
