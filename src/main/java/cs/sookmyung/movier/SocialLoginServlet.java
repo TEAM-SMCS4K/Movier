@@ -3,6 +3,7 @@ package cs.sookmyung.movier;
 import cs.sookmyung.movier.dao.MemberDAO;
 import cs.sookmyung.movier.model.Member;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,10 @@ public class SocialLoginServlet extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("member_id", userId);
+            session.setAttribute("nickname", nickname);
+            session.setAttribute("profile_img", profileImg);
+
+            response.sendRedirect("index.jsp"); // Redirect to main page
         } catch (NoSuchElementException e) {
             // 회원이 존재하지 않으면 새로 생성
             try {
@@ -36,6 +41,10 @@ public class SocialLoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("member_id", memberId);
+                session.setAttribute("nickname", nickname);
+                session.setAttribute("profile_img", profileImg);
+
+                response.sendRedirect("index.jsp"); // Redirect to main page
             } catch (IllegalArgumentException ex) {
                 LOGGER.log(Level.WARNING, "Invalid input for social platform ID: " + socialPlatformId);
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "잘못된 입력값입니다.");

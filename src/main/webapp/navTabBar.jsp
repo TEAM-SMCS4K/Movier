@@ -99,11 +99,7 @@
 
     function logout() {
         alert("로그아웃합니다.");
-        <%
-         // 세션 무효화
-        session.invalidate();
-        %>
-        window.location.href = "movieMain.jsp"; // 메인 페이지
+        window.location.href="logout";
     }
 
     function login() {
