@@ -1,6 +1,5 @@
 package cs.sookmyung.movier.dao;
 
-import cs.sookmyung.movier.model.Movie;
 import cs.sookmyung.movier.model.MovieReview;
 import cs.sookmyung.movier.model.MyPageReview;
 import cs.sookmyung.movier.model.ReviewDetail;
@@ -35,6 +34,30 @@ public class ReviewDAO {
     private Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
+    }
+
+    public Review getReviewById(int reviewId) {
+        String sql = "SELECT * FROM reviews WHERE review_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, reviewId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new Review(
+                            resultSet.getInt("review_id"),
+                            resultSet.getInt("reviewer_id"),
+                            resultSet.getInt("movie_id"),
+                            resultSet.getDouble("review_rating"),
+                            resultSet.getString("review_content"),
+                            resultSet.getDate("review_created_at")
+                    );
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.error("리뷰 정보를 가져오는데 실패했습니다.", e);
+        }
+        return null;
     }
 
     public int getReviewCountByMemberId(int memberId) throws SQLException {
@@ -205,6 +228,36 @@ public class ReviewDAO {
             }
             else {
                 LOGGER.error("Database error");
+                throw new SQLException("Database error", e);
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Database driver not found", e);
+            throw new SQLException("Database driver not found", e);
+        }
+    }
+    public boolean updateReview(Review review) throws SQLException {
+        String sql = "{ call update_review(?, ?, ?, ?, ?, ?) }";
+
+        try (Connection conn = getConnection(); CallableStatement cstmt = conn.prepareCall(sql)) {
+            cstmt.setInt(1, review.getReviewId());
+            cstmt.setInt(2, review.getMemberId());
+            cstmt.setInt(3, review.getMovieId());
+            cstmt.setDouble(4, review.getReviewRating());
+            cstmt.setString(5, review.getReviewContent());
+            cstmt.setDate(6, new java.sql.Date(review.getReviewCreatedAt().getTime()));
+            cstmt.executeUpdate();
+            return true;    // 별점이나 리뷰 내용에 변화가 없더라도 수정이라고 간주
+        } catch (SQLException e) {
+            int errorCode = e.getErrorCode();
+            if(errorCode == 20001) {
+                LOGGER.error("별점이 입력되지 않았습니다.");
+                throw new SQLException("별점이 입력되지 않았습니다.");
+            }
+            else if(errorCode==20003){
+                LOGGER.error("리뷰 내용이 입력되지 않았습니다.");
+                throw new SQLException("리뷰 내용이 입력되지 않았습니다.");
+            }
+            else {
                 throw new SQLException("Database error", e);
             }
         } catch (ClassNotFoundException e) {
