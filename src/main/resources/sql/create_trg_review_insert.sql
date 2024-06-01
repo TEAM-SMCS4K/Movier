@@ -1,20 +1,22 @@
 CREATE OR REPLACE TRIGGER trg_review_insert
-    AFTER INSERT ON reviews
-    FOR EACH ROW
+AFTER INSERT ON reviews
+FOR EACH ROW
 DECLARE
-    v_review_count NUMBER;
-    v_total_rating NUMBER;
+v_review_count MOVIES.MOVIE_REVIEW_COUNT%TYPE;
+    v_total_rating MOVIES.MOVIE_REVIEW_AVERAGE_RATING%TYPE;
+    cur SYS_REFCURSOR;
 BEGIN
-    -- 리뷰 개수와 총 별점 합 계산
-    SELECT COUNT(*), NVL(SUM(review_rating), 0)
-    INTO v_review_count, v_total_rating
-    FROM reviews
-    WHERE movie_id = :NEW.movie_id;
+    -- 독립적인 트랜잭션 함수를 호출하여 커서를 얻음
+    cur := get_movie_review_info(:NEW.movie_id);
 
-    -- 영화 테이블 업데이트
-    UPDATE movies
-    SET movie_review_count = v_review_count,
-        movie_review_average_rating = v_total_rating / v_review_count
-    WHERE movie_id = :NEW.movie_id;
+    -- 커서에서 값 추출
+FETCH cur INTO v_review_count, v_total_rating;
+CLOSE cur;
+
+-- 영화 테이블 업데이트
+UPDATE MOVIES
+SET MOVIE_REVIEW_COUNT = v_review_count,
+    MOVIE_REVIEW_AVERAGE_RATING = v_total_rating / v_review_count
+WHERE MOVIE_ID = :NEW.movie_id;
 END;
 /
