@@ -3,7 +3,8 @@ body {
 }
 
 #rating-number {
-    width: 54px;
+    font-size: 33px;
+    width: 55px;
     display: inline-block;
     text-align: center;
 }
