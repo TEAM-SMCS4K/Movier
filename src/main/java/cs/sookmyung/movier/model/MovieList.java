@@ -28,7 +28,7 @@ public class MovieList {
     }
 
     public double getRating() {
-        return rating;
+        return Math.round(rating * 10.0) / 10.0;
     }
 
     public int getReview_count() {
