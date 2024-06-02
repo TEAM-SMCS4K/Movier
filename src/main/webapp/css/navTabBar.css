@@ -30,6 +30,10 @@
     margin-left: 200px;
 }
 
+#nav_logo_image{
+    width: 100%;
+}
+
 .nickname {
     color: #FFFFFF;
     font-weight: 700;
