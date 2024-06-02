@@ -5,12 +5,14 @@
 <%@ page import="cs.sookmyung.movier.model.Movie" %>
 <%@ page import="cs.sookmyung.movier.dao.ReviewDAO" %>
 <%@ page import="cs.sookmyung.movier.model.Review" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%
     Integer memberId = (Integer) session.getAttribute("member_id");
     int reviewId = Integer.parseInt(request.getParameter("reviewId"));
     boolean redirectToLogin = false;
     String alertMessage = "";
     int movieId = -1;
+    String starRatingFormatted = "";
 
     if (memberId == null) {
         redirectToLogin = true;
@@ -57,6 +59,10 @@
     if (!redirectToLogin) {
         Movie movie = (Movie) request.getAttribute("movie");
         Review review = (Review) request.getAttribute("review");
+
+        // 별점 포맷팅
+        DecimalFormat df = new DecimalFormat("0.0");
+        starRatingFormatted = df.format(review.getReviewRating());
 %>
 <div class="background-container" style="background: url(<%=movie.getThumbnailImg() %>)no-repeat center /cover">
     <jsp:include page="/navTabBar.jsp"/>
@@ -84,7 +90,7 @@
             </form>
             <script>
                 $(document).ready(function(){
-                    var starRating = <%=review.getReviewRating()%>;
+                    var starRating = "<%= starRatingFormatted %>";  // 포맷된 별점 적용
                     let stars = document.querySelectorAll('.rating .star-icon');
 
                     if (starRating) {
