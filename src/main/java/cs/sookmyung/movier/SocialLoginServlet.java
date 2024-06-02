@@ -32,7 +32,7 @@ public class SocialLoginServlet extends HttpServlet {
             session.setAttribute("nickname", nickname);
             session.setAttribute("profile_img", profileImg);
 
-            response.sendRedirect("index.jsp"); // Redirect to main page
+            response.sendRedirect("movieMain.jsp"); // Redirect to main page
         } catch (NoSuchElementException e) {
             // 회원이 존재하지 않으면 새로 생성
             try {
@@ -44,7 +44,7 @@ public class SocialLoginServlet extends HttpServlet {
                 session.setAttribute("nickname", nickname);
                 session.setAttribute("profile_img", profileImg);
 
-                response.sendRedirect("index.jsp"); // Redirect to main page
+                response.sendRedirect("movieMain.jsp"); // Redirect to main page
             } catch (IllegalArgumentException ex) {
                 LOGGER.log(Level.WARNING, "Invalid input for social platform ID: " + socialPlatformId);
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "잘못된 입력값입니다.");
