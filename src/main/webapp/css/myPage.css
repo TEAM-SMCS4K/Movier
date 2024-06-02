@@ -19,10 +19,8 @@ header {
     flex: 1;
 }
 
-.nav_tab_var .movier-logo {
+.nav_tab_var #nav_logo_image {
     content: url("/img/movier_logo.svg");
-    height: 44px;
-    margin-left: 200px;
 }
 
 .nav_tab_var .profile .nickname {
