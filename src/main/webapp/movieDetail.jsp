@@ -17,14 +17,23 @@
 </head>
 <body>
 <%
-    int movieId = Integer.parseInt(request.getParameter("movieId"));
+    String movieId = request.getParameter("movieId");
+    if(movieId == null){
+%>
+<script type="text/javascript">
+    alert("잘못된 접근입니다");
+    window.location.href = "/movieMain.jsp";
+</script>
+<%
+        return;
+    }
     MovieDAO movieDao = MovieDAO.getInstance();
-    Movie movie = movieDao.getMovieById(movieId);
+    Movie movie = movieDao.getMovieById(Integer.parseInt(movieId));
 
     if(movie == null){
 %>
 <script type="text/javascript">
-    alert("잘못된 접근입니다");
+    alert("해당 영화를 찾을 수 없습니다");
     window.location.href = "/movieMain.jsp";
 </script>
 <%
