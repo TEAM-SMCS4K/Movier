@@ -55,9 +55,7 @@
         </div>
     </div>
     <div class="main-content">
-        <div class="summary">
-            <%=movie.getPlot()%>
-        </div>
+        <div class="summary"><%=movie.getPlot()%></div>
         <jsp:include page="/reviewRequest.jsp">
             <jsp:param name="movieTitle" value="<%=movie.getTitle()%>" />
         </jsp:include>
