@@ -6,17 +6,20 @@ body {
 
 .movie_list_title {
     color: #151212;
-    font-weight: 700;
     font-size: 32px;
-    margin-bottom: 18px;
+    font-weight: 600;
+    line-height: 38px;
     display: block;
+    margin-left: -38px;
+    margin-bottom: 30px;
 }
 
 .movie_list_grid {
     display: grid;
-    grid-template-columns: repeat(20, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     padding: 0 300px 300px 0;
+    justify-content: center;
 }
 
 .poster {
