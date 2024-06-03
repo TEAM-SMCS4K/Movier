@@ -15,7 +15,7 @@
 </head>
 <body>
 <div style="display: flex; align-items: center;">
-    <span id="rating-number" style="margin-right: 8px;">0</span>
+    <span id="rating-number" style="margin-right: 8px;">0.0</span>
     <div class="rating">
         <label class="rating__label rating__label--half" for="starhalf">
             <input type="radio" id="starhalf" class="rating__input" name="starRating" value="0.5">
