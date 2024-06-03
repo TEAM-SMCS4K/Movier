@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cs.sookmyung.movier.dao.ReviewDAO" %>
-<%@ page import="cs.sookmyung.movier.dao.MemberDAO" %>
 <%@ page import="cs.sookmyung.movier.model.ReviewDetail" %>
 <%
     Integer memberId = (Integer) session.getAttribute("member_id");
     boolean redirectToLogin = false;
+    boolean redirectToMyPage = false;
     String alertMessage = "";
     ReviewDetail reviewDetail = null;
 
@@ -19,14 +19,14 @@
             reviewDetail = reviewDAO.getReviewDetailsByMemberId(reviewId, memberId);
 
             if (reviewDetail == null) {
-                redirectToLogin = true;
+                redirectToMyPage = true;
                 alertMessage = "리뷰를 찾을 수 없습니다.";
             } else {
                 request.setAttribute("reviewDetail", reviewDetail);
             }
         } else {
-            redirectToLogin = true;
-            alertMessage = "리뷰 ID가 제공되지 않았습니다.";
+            redirectToMyPage = true;
+            alertMessage = "잘못된 접근입니다.";
         }
     }
 
@@ -87,6 +87,11 @@
 <script>
     alert("<%= alertMessage %>");
     window.location.href = 'socialLogin.jsp';
+</script>
+<% } else if (redirectToMyPage) { %>
+<script>
+    alert("<%= alertMessage %>");
+    window.location.href = 'myPage.jsp';
 </script>
 <% } else if (reviewDetail != null) { %>
 <div class="background-container" style="background: url('<%= reviewDetail.getThumbnailImg() %>') no-repeat center / cover;">
