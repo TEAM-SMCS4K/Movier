@@ -16,6 +16,7 @@ body {
 .movie_list_grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    width: 966px;
     gap: 20px;
     padding: 0 300px 300px 0;
     justify-content: center;
