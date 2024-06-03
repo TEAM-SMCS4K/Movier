@@ -24,8 +24,10 @@
         <img src="img/icn_search.svg" alt="search" class="search_icon">
         <input type="text" id="search_input" placeholder="영화의 제목을 입력하세요.">
     </div>
-    <div class="movie_list">
-        <jsp:include page="movieLists.jsp"/>
+    <div class = "separator-movie-list">
+        <div class="movie_list">
+            <jsp:include page="movieLists.jsp"/>
+        </div>
     </div>
 </div>
 <script>

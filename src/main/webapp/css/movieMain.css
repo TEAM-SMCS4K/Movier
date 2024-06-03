@@ -46,8 +46,14 @@
     color: #AFA8A8;
 }
 
-.movie_list {
+.movie_list{
+    display: flex;
+    flex-direction: column;
+}
+
+.separator-movie-list {
     padding-top: 72px;
-    padding-left: 300px;
     padding-bottom: 18px;
+    display: flex;
+    justify-content: center;
 }
