@@ -25,6 +25,8 @@ body {
     margin: 0 200px;
     padding: 30px;
     height: 559px;
+    top: 50%;
+    transform: translateY(-65%);
     color: #000;
     position: relative;
 }
