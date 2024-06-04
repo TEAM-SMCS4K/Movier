@@ -40,7 +40,7 @@
         return;
     }
 
-    double startRatingWidth = (movie.getRatingAverage() / 5) * 100;
+    double startRatingWidth = (Double.parseDouble(movie.getRatingAverage())/5) * 100;
     request.setCharacterEncoding("UTF-8");
 %>
 <div class="background-container" style="background: url(<%=movie.getThumbnailImg()%>)no-repeat center /cover">

@@ -67,8 +67,8 @@ public class Movie {
         return plot;
     }
 
-    public double getRatingAverage() {
-        return Math.round(ratingAverage * 10.0) / 10.0;
+    public String getRatingAverage() {
+        return String.format("%.1f", ratingAverage);
     }
 
     public String getReviewCount() {

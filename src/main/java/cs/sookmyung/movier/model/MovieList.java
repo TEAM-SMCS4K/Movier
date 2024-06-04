@@ -27,8 +27,8 @@ public class MovieList {
         return posterImg;
     }
 
-    public double getRating() {
-        return Math.round(rating * 10.0) / 10.0;
+    public String getRating() {
+        return String.format("%.1f", rating);
     }
 
     public int getReview_count() {
