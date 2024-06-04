@@ -22,10 +22,16 @@
         } else {
             MovieDAO movieDao = MovieDAO.getInstance();
             Movie movie = movieDao.getMovieById(movieId);
-            request.setAttribute("member", member);
-            request.setAttribute("movie", movie);
-            placeholderText = movie.getTitle() + "에 대한 " + member.getNickname() + " 님의 생각을 써주세요!";
+            if (movie == null) {
+                redirectToLogin = true;
+                alertMessage = "영화를 찾을 수 없습니다";
+            } else {
+                request.setAttribute("member", member);
+                request.setAttribute("movie", movie);
+                placeholderText = movie.getTitle() + "에 대한 " + member.getNickname() + " 님의 생각을 써주세요!";
+            }
         }
+
     }
 %>
 
