@@ -48,7 +48,7 @@ body {
     width: 55px;
     display: inline-block;
     text-align: center;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .star-container {
@@ -84,7 +84,7 @@ body {
     font-weight: 500;
     font-size: 20px;
     line-height: 28px;
-    margin-left: 5px;
+    margin-left: 2px;
     display: flex;
     align-items: center;
     color: #151212;

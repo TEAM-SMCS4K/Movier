@@ -11,7 +11,7 @@ body {
 
 .rating {
     float: none;
-    width: 220px;
+    /*width: 220px;*/
     display: flex;
 }
 
@@ -20,20 +20,20 @@ body {
 }
 
 .rating__label {
-    width: 20px;
+    width: 22px;
     overflow: hidden;
     cursor: pointer;
 }
 
 .star-icon {
-    width: 20px;
-    height: 40px;
+    width: 22px;
+    height: 44px;
     display: block;
     position: relative;
     left: 0;
     background-image: url('../img/icn_star_empty.svg');
     background-repeat: no-repeat;
-    background-size: 40px;
+    background-size: 44px;
 }
 
 .star-icon.filled {
