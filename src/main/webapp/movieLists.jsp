@@ -23,17 +23,5 @@
     </div>
     <% } %>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const movieCells = document.querySelectorAll(".cell");
-
-        movieCells.forEach(cell => {
-            cell.addEventListener("click", function() {
-                const movieId = this.getAttribute("data-movie-id");
-                window.location.href = "movieDetail.jsp?movieId=" + movieId;
-            });
-        });
-    });
-</script>
 </body>
 </html>

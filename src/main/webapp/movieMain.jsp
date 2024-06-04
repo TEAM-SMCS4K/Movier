@@ -35,7 +35,6 @@
         const searchInput = document.getElementById("search_input");
         const logoImage = document.getElementById("logo_image")
 
-        // 검색 실행 함수
         function performSearch() {
             const searchQuery = searchInput.value.trim();
             if (searchQuery !== "") {
@@ -45,22 +44,21 @@
             }
         }
 
-        // 엔터키 입력 시 검색 실행
         searchInput.addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) { // Enter key code
+            if (event.key === "Enter") {
                 performSearch();
             }
         });
 
-        // 여기부텅
         function fetchMovies(searchQuery) {
             $.ajax({
                 url: "searchMovieLists.jsp",
                 type: "GET",
                 data: { keyword: searchQuery },
                 success: function(response) {
-                    $(".movie_list").html(response); // 영화 리스트 업데이트
+                    $(".movie_list").html(response);
                     $(".movie_list_title").text("'" + searchQuery + "'에 대한 검색결과"); // title 업데이트
+                    setMovieClickHandlers();
                 },
                 error: function(xhr, status, error) {
                     alert("검색 과정에서 오류가 발생했습니다.\n" + xhr.responseText);
@@ -71,6 +69,18 @@
         logoImage.addEventListener("click", function() {
             location.reload();
         });
+
+        function setMovieClickHandlers() {
+            const movieCells = document.querySelectorAll(".cell");
+            movieCells.forEach(cell => {
+                cell.addEventListener("click", function() {
+                    const movieId = this.getAttribute("data-movie-id");
+                    window.location.href = "movieDetail.jsp?movieId=" + movieId;
+                });
+            });
+        }
+
+        setMovieClickHandlers();
     });
 </script>
 </body>
