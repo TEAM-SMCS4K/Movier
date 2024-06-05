@@ -12,9 +12,9 @@
         MovieDAO movieDAO = MovieDAO.getInstance();
 
         try {
-            movie = movieDAO.getMovieInfoByMovieId(movieId); // getMovieInfoByMovieId 사용
+            movie = movieDAO.getMovieInfoByMovieId(movieId);
             if (movie == null) {
-                throw new SQLException("No movie found for the given movie ID.");
+                throw new SQLException("잘못된 접근입니다.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
