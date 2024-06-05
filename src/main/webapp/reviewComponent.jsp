@@ -42,18 +42,18 @@
     <div class="review-actions">
         <p class="total-like"><%= request.getParameter("likes") %></p>
         <p class="like-comment">명이 공감해요!</p>
-        <button class="<%= isSympathized ? "dislike-button" : "like-button" %>"><%=message%></button>
+        <button id="<%=reviewId%>" class="<%= isSympathized ? "dislike-button" : "like-button" %>"><%=message%></button>
     </div>
     <hr class="review-separator">
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $(".review-actions button").off("click").on("click", function (event) {
+        $("#<%=reviewId%>").off("click").on("click", function (event) {
             event.preventDefault();
             var button = $(this);
             var memberId = <%=memberId %>;
-            var reviewId = <%=reviewId%>
+            var reviewId = <%=reviewId%>;
 
             if (memberId === -1) {
                 alert("로그인 후 이용해주세요");
@@ -64,7 +64,7 @@
                     data: { memberId: memberId, reviewId: reviewId },
                     success: function (response) {
                         if (response.success) {
-                            var totalLikes = button.closest(".review").find(".total-like");
+                            var totalLikes = button.closest(".review-actions").find(".total-like");
                             if (response.isSympathized) {
                                 button.removeClass("like-button").addClass("dislike-button").text("취소하기");
                             } else {
