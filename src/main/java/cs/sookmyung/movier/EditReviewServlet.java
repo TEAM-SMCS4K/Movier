@@ -55,7 +55,7 @@ public class EditReviewServlet extends HttpServlet {
             }
         } catch (SQLException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("{\"message\":\"SQL 오류가 발생했습니다: " + e.getMessage() + "\"}");
+            response.getWriter().write("{\"message\":\"" + e.getMessage() + "\"}");
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{\"message\":\"서버 오류가 발생했습니다: " + e.getMessage() + "\"}");
