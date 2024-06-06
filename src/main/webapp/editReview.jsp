@@ -8,34 +8,46 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%
     Integer memberId = (Integer) session.getAttribute("member_id");
-    int reviewId = Integer.parseInt(request.getParameter("reviewId"));
     boolean redirectToLogin = false;
     String alertMessage = "";
     int movieId = -1;
     String starRatingFormatted = "";
+    int reviewId = -1;
 
     if (memberId == null) {
         redirectToLogin = true;
         alertMessage = "로그인이 필요합니다";
     } else {
-        MemberDAO memberDao = MemberDAO.getInstance();
-        Member member = memberDao.getMemberById(memberId);
-        if (member == null) {
+        String reviewIdParam = request.getParameter("reviewId");
+        if (reviewIdParam == null) {
             redirectToLogin = true;
             alertMessage = "잘못된 접근입니다";
         } else {
-            ReviewDAO reviewDao = ReviewDAO.getInstance();
-            Review review = reviewDao.getReviewById(reviewId);
-            if (review == null) {
+            try {
+                reviewId = Integer.parseInt(reviewIdParam);
+                MemberDAO memberDao = MemberDAO.getInstance();
+                Member member = memberDao.getMemberById(memberId);
+                if (member == null) {
+                    redirectToLogin = true;
+                    alertMessage = "잘못된 접근입니다";
+                } else {
+                    ReviewDAO reviewDao = ReviewDAO.getInstance();
+                    Review review = reviewDao.getReviewById(reviewId);
+                    if (review == null) {
+                        redirectToLogin = true;
+                        alertMessage = "해당 리뷰를 찾을 수 없습니다";
+                    } else {
+                        movieId = review.getMovieId();
+                        MovieDAO movieDao = MovieDAO.getInstance();
+                        Movie movie = movieDao.getMovieById(movieId);
+                        request.setAttribute("member", member);
+                        request.setAttribute("movie", movie);
+                        request.setAttribute("review", review);
+                    }
+                }
+            } catch (NumberFormatException e) {
                 redirectToLogin = true;
-                alertMessage = "리뷰를 찾을 수 없습니다";
-            } else {
-                movieId = review.getMovieId();
-                MovieDAO movieDao = MovieDAO.getInstance();
-                Movie movie = movieDao.getMovieById(movieId);
-                request.setAttribute("member", member);
-                request.setAttribute("movie", movie);
-                request.setAttribute("review", review);
+                alertMessage = "잘못된 접근입니다";
             }
         }
     }
