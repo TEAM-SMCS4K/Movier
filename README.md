@@ -163,7 +163,9 @@
 </br>
 
 ## 💽 Database ERD
-<img width="755" alt="image" src="https://github.com/TEAM-SMCS4K/Movier/assets/101168694/9249526f-8346-49b1-8027-9250e23a50fc">
+<img width="626" alt="image" src="https://github.com/TEAM-SMCS4K/Movier/assets/81363864/b4df3494-73f1-4114-97c3-35bbb1b07915">
+
+
 
 
 </br>
