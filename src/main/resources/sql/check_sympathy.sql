@@ -1,6 +1,6 @@
 CREATE OR REPLACE PROCEDURE check_sympathy(
-    member_id IN sympathy.p_member_id%TYPE,
-    review_id IN sympathy.p_review_id%TYPE,
+    member_id IN sympathy.s_member_id%TYPE,
+    review_id IN sympathy.s_review_id%TYPE,
     p_result OUT NUMBER -- BOOLEAN 대신 NUMBER 사용
 ) AS
     v_sympathy sympathy%ROWTYPE;
@@ -15,7 +15,7 @@ BEGIN
     BEGIN
         SELECT * INTO v_sympathy
         FROM sympathy
-        WHERE p_member_id = member_id AND p_review_id = review_id;
+        WHERE s_member_id = member_id AND s_review_id = review_id;
         p_result := 1; -- 공감한 경우 1
 
     EXCEPTION

@@ -75,7 +75,7 @@ public class SympathyDAO {
 
 
     public boolean addSympathy(int memberId, int reviewId) {
-        String sql = "INSERT INTO sympathy (p_member_id, p_review_id) VALUES (?, ?)";
+        String sql = "INSERT INTO sympathy (s_member_id, s_review_id) VALUES (?, ?)";
         boolean result = false;
         try (Connection connection = getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, memberId);
