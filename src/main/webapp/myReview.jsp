@@ -53,45 +53,48 @@
     <link rel="stylesheet" href="/css/myReview.css">
     <link rel="stylesheet" href="/css/writeReview.css">
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function confirmDelete(reviewId, memberId) {
             if (confirm("리뷰를 삭제하시겠습니까?")) {
-                fetch('myReview.jsp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                $.ajax({
+                    url: 'myReview.jsp',
+                    type: 'POST',
+                    data: {
+                        action: 'delete',
+                        reviewId: reviewId,
+                        memberId: memberId
                     },
-                    body: 'action=delete&reviewId=' + reviewId + '&memberId=' + memberId.toString()
-                }).then(response => {
-                    console.log(response);
-                    if (response.ok) {
+                    success: function() {
                         alert('리뷰가 삭제되었습니다.');
                         window.location.href = 'myPage.jsp';
-                    } else {
-                        response.text().then(text => {
-                            console.error('서버 응답:', text);
-                            alert('리뷰 삭제를 취소했습니다.');
-                        });
+                    },
+                    error: function(xhr, status, error) {
+                        alert('리뷰 삭제에 실패했습니다.');
+                        console.error('서버 응답:', xhr.responseText);
                     }
-                }).catch(error => {
-                    console.error('Fetch Error:', error);
-                    alert('리뷰 삭제에 실패했습니다.');
                 });
+            } else {
+                alert('리뷰 삭제를 취소했습니다.');
             }
         }
+
+        $(document).ready(function() {
+            <% if (redirectToLogin) { %>
+            alert("<%= alertMessage %>");
+            window.location.href = 'socialLogin.jsp';
+            <% } else if (redirectToMyPage) { %>
+            alert("<%= alertMessage %>");
+            window.location.href = 'myPage.jsp';
+            <% } %>
+        });
     </script>
 </head>
 <body>
-<% if (redirectToLogin) { %>
+<% if (redirectToLogin || redirectToMyPage) { %>
 <script>
     alert("<%= alertMessage %>");
-    window.location.href = 'socialLogin.jsp';
-</script>
-<% } else if (redirectToMyPage) { %>
-<script>
-    alert("<%= alertMessage %>");
-    window.location.href = 'myPage.jsp';
+    window.location.href = '<%= redirectToLogin ? "socialLogin.jsp" : "myPage.jsp" %>';
 </script>
 <% } else if (reviewDetail != null) { %>
 <div class="background-container" style="background: url('<%= reviewDetail.getThumbnailImg() %>') no-repeat center / cover;">

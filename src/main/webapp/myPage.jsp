@@ -38,11 +38,14 @@
     <title>MOVIER</title>
     <link rel="stylesheet" href="css/myPage.css">
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        <% if (redirectToLogin) { %>
-        alert("<%= alertMessage %>");
-        window.location.href = 'socialLogin.jsp';
-        <% } %>
+        $(document).ready(function() {
+            <% if (redirectToLogin) { %>
+            alert("<%= alertMessage %>");
+            window.location.href = 'socialLogin.jsp';
+            <% } %>
+        });
     </script>
 </head>
 <body>
